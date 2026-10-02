@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UNIO
 
-## Getting Started
+A founder-led software studio website built with Next.js 16, React 19, TypeScript and Tailwind CSS 4. Mongolian is the default; English is available throughout the interface and the visitor's choice persists locally.
 
-First, run the development server:
+## Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+```sh
+bun install --frozen-lockfile
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```sh
+bun run lint
+bunx tsc --noEmit
+bun run build
+bun start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content and components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `lib/i18n.ts`: Mongolian and English interface copy.
+- `lib/projects.ts`: six supplied project URLs and factual descriptions.
+- `lib/contact.ts`: contact destination and email-draft generation.
+- `components/`: navigation, hero/interface illustration, editorial project cards, services, case study, founder/process, contact dialog and footer.
+- `public/projects/`: optimized WebP screenshots captured from the real sites on October 1, 2026.
+- `public/fonts/`: self-hosted Manrope, including Cyrillic Ө/ө and Ү/ү.
 
-## Learn More
+The store is explicitly a demo. Dental, coffee and education are presented as demo work rather than claimed paying clients. Movie App is an experiment under More work. Organic Care's three-branch usage comes from the supplied brief; the founder's live portfolio confirms the private production system. Its accompanying admin screenshot and direct project URL were supplied by the owner.
 
-To learn more about Next.js, take a look at the following resources:
+## Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The form validates locally, then opens the visitor's email app with a prefilled inquiry to `devcode549@gmail.com`, verified on Khulan's public portfolio. The visitor must send that email themselves. A downloadable plain-text inquiry is also available. No delivery success is fabricated; no inquiry is stored by this website. Native dialog semantics provide Escape dismissal, focus containment and return focus.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The form's adapter is isolated in `lib/contact.ts` so a server-side email provider can be integrated later. Do not put provider credentials in `NEXT_PUBLIC_` variables.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deploy as a standard Next.js application. The production script uses the supported webpack builder because Turbopack hit a worker-port error in this environment. Copy `.env.example` into your hosting environment as needed, then rebuild:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `NEXT_PUBLIC_SITE_URL`: the actual production origin; enables canonical metadata and sitemap. No domain has been invented.
+- `NEXT_PUBLIC_CONTACT_EMAIL`: optional studio inbox override.
+- `NEXT_PUBLIC_INSTAGRAM_URL`: optional verified studio profile; link is omitted until configured.
+
+Open Graph image, custom favicon, manifest and robots route are included. The default metadata is Mongolian, with English title/description updated when switched. This lightweight single-URL language approach does not produce separately indexed English pages.
+
+## Remaining owner assets
+
+Confirm the preferred studio inbox, supply the Instagram URL and final domain. Pricing was intentionally omitted to keep the requested homepage focused.
