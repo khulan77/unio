@@ -6,10 +6,12 @@ export type Project = {
   category: Record<Language, string>;
   description: Record<Language, string>;
   status: "demo" | "project" | "experiment";
+  video: { src: string; duration: string };
 };
 export const projects: Project[] = [
   {
     id: "salon",
+    video: { src: "/projects/videos/usertal.mp4", duration: "0:42" },
     name: "Lumière Salon",
     url: "https://salon-ecru-seven.vercel.app/",
     category: {
@@ -24,6 +26,7 @@ export const projects: Project[] = [
   },
   {
     id: "dental",
+    video: { src: "/projects/videos/dental.mp4", duration: "0:12" },
     name: "Dental Clinic",
     url: "https://dental-clinic77-green.vercel.app/",
     category: {
@@ -38,6 +41,7 @@ export const projects: Project[] = [
   },
   {
     id: "store",
+    video: { src: "/projects/videos/store.mp4", duration: "0:12" },
     name: "The Everyday Store",
     url: "https://store-virid-delta-66.vercel.app/",
     category: { mn: "ОНЛАЙН ДЭЛГҮҮР / ДЕМО", en: "E-COMMERCE / DEMO" },
@@ -49,6 +53,7 @@ export const projects: Project[] = [
   },
   {
     id: "coffee",
+    video: { src: "/projects/videos/coffee.mp4", duration: "0:12" },
     name: "Afterglow Coffee",
     url: "https://coffee-shop-zeta-seven.vercel.app/",
     category: { mn: "ХООЛ ҮЙЛЧИЛГЭЭ / ВЭБСАЙТ", en: "HOSPITALITY / WEBSITE" },
@@ -60,6 +65,7 @@ export const projects: Project[] = [
   },
   {
     id: "education",
+    video: { src: "/projects/videos/education.mp4", duration: "0:12" },
     name: "Зөв бичгийн баатар",
     url: "https://bagiin-project-last-nykf.vercel.app/",
     category: { mn: "БОЛОВСРОЛ / ПЛАТФОРМ", en: "EDUCATION / PLATFORM" },
@@ -70,7 +76,23 @@ export const projects: Project[] = [
     status: "demo",
   },
   {
+    id: "astrology",
+    video: { src: "/projects/videos/astrology.mp4", duration: "0:12" },
+    name: "Одон Орон",
+    url: "https://astrology-alpha-five.vercel.app/",
+    category: {
+      mn: "АСТРОЛОГИ / ВЭБ ПЛАТФОРМ",
+      en: "ASTROLOGY / WEB PLATFORM",
+    },
+    description: {
+      mn: "Эрхэсийн зураглал, ордууд болон хувийн зурхайн боломжуудыг танилцуулсан Монгол хэл дээрх астрологийн вэб туршлага.",
+      en: "A Mongolian astrology web experience presenting birth-chart visuals, zodiac signs and personal horoscope features.",
+    },
+    status: "project",
+  },
+  {
     id: "movie",
+    video: { src: "/projects/videos/movie.mp4", duration: "0:12" },
     name: "Movie App",
     url: "https://movie-app-1ari.vercel.app/",
     category: { mn: "ВЭБ АПП / ТУРШИЛТ", en: "WEB APPLICATION / EXPERIMENT" },

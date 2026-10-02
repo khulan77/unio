@@ -19,10 +19,10 @@ bun start
 ## Content and components
 
 - `lib/i18n.ts`: Mongolian and English interface copy.
-- `lib/projects.ts`: six supplied project URLs and factual descriptions.
+- `lib/projects.ts`: seven supplied project URLs and factual descriptions.
 - `lib/contact.ts`: contact destination and email-draft generation.
 - `components/`: navigation, hero/interface illustration, editorial project cards, services, case study, founder/process, contact dialog and footer.
-- `public/projects/`: optimized WebP screenshots captured from the real sites on October 1, 2026.
+- `public/projects/`: optimized WebP screenshots captured from the real sites on October 1–2, 2026.
 - `public/fonts/`: self-hosted Manrope, including Cyrillic Ө/ө and Ү/ү.
 
 The store is explicitly a demo. Dental, coffee and education are presented as demo work rather than claimed paying clients. Movie App is an experiment under More work. Organic Care's three-branch usage comes from the supplied brief; the founder's live portfolio confirms the private production system. Its accompanying admin screenshot and direct project URL were supplied by the owner.
@@ -46,3 +46,9 @@ Open Graph image, custom favicon, manifest and robots route are included. The de
 ## Remaining owner assets
 
 Confirm the preferred studio inbox, supply the Instagram URL and final domain. Pricing was intentionally omitted to keep the requested homepage focused.
+
+## Project walkthrough videos
+
+Project cards play silent looping videos directly as they enter the viewport. Offscreen videos and videos in background tabs pause automatically. A small keyboard-accessible control lets visitors pause or resume, and manually paused videos stay paused when scrolled back into view. Reduced-motion preferences disable automatic playback while leaving manual playback available.
+
+The player assigns the video source only when it becomes visible or is manually played. `lib/projects.ts` stores each path and duration. The salon uses the owner-provided `public/projects/videos/usertal.mp4` (42 seconds). Other projects use the previously captured approximately 12-second public-site tours. Replace an MP4 at the same path, or update its `video.src` and `video.duration` to use a new file.
