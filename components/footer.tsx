@@ -1,38 +1,37 @@
 "use client";
+import Link from "next/link";
 import { useLanguage } from "./language-provider";
 import { ExternalLink, Logo } from "./ui";
 import { portfolioUrl } from "@/lib/projects";
-import { instagramUrl } from "@/lib/contact";
 export function Footer() {
   const { t } = useLanguage();
   return (
     <footer className="container site-footer">
       <div className="footer-top">
-        <a href="#" aria-label="UNIO">
+        <Link href="/" aria-label="UNIO">
           <Logo />
-        </a>
+        </Link>
         <p>{t.tagline}</p>
         <nav aria-label={t.nav.join(" / ")}>
           {t.nav.map((name, i) => (
-            <a
+            <Link
               key={name}
-              href={`#${["work", "services", "about", "contact"][i]}`}
+              href={
+                ["/#work", "/#services", "/pricing", "/#about", "#contact"][i]
+              }
             >
               {name}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 UNIO. {t.footer}</span>
+        <span>© 2026 UNIO.</span>
         <div>
-          {instagramUrl && (
-            <ExternalLink href={instagramUrl}>Instagram</ExternalLink>
-          )}
           <ExternalLink href={portfolioUrl}>{t.portfolio}</ExternalLink>
-          <a href="#" className="back-top" aria-label={t.studio}>
+          <Link href="#" className="back-top" aria-label={t.studio}>
             <ArrowUp />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

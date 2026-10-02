@@ -111,16 +111,18 @@ export function SectionHeading({
   label,
   title,
   description,
+  as: Heading = "h2",
 }: {
   label: string;
   title: string;
   description?: string;
+  as?: "h1" | "h2";
 }) {
   return (
     <div className="section-heading">
       <div>
         <p className="eyebrow">{label}</p>
-        <h2>{title}</h2>
+        <Heading>{title}</Heading>
       </div>
       {description && <p className="section-description">{description}</p>}
     </div>

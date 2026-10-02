@@ -1,13 +1,50 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "./language-provider";
 import { Arrow, ExternalLink } from "./ui";
-import { contactEmail, inquiryMailto, inquiryText } from "@/lib/contact";
+import {
+  contactEmail,
+  contactPhone,
+  contactPhoneHref,
+  instagramUrl,
+  facebookUrl,
+  inquiryMailto,
+  inquiryText,
+} from "@/lib/contact";
+import { plans, pricingCopy, type PricingInquiry } from "@/lib/pricing";
+import { addons, scopeCopy } from "@/lib/service-scope";
 import { portfolioUrl } from "@/lib/projects";
 export function Contact() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const p = pricingCopy[language];
+  const [selection, setSelection] = useState<PricingInquiry | null>(null);
+  const [serviceIndex, setServiceIndex] = useState("");
+  const selectedAddon = addons.find((addon) => addon.id === selection?.addon);
+  const selectedIndex = plans.findIndex((plan) => plan.id === selection?.plan);
   const dialog = useRef<HTMLDialogElement>(null);
   const [status, setStatus] = useState("");
+  useEffect(() => {
+    const openInquiry = (event: Event) => {
+      const detail = (event as CustomEvent<PricingInquiry>).detail;
+      const plan = plans.find((plan) => plan.id === detail?.plan);
+      if (
+        !plan ||
+        !["project", "monthly", "subscription"].includes(detail.payment)
+      )
+        return;
+      setSelection({
+        ...detail,
+        addon: addons.some((addon) => addon.id === detail.addon)
+          ? detail.addon
+          : undefined,
+      });
+      setServiceIndex(String(plan.serviceIndex));
+      setStatus("");
+      dialog.current?.showModal();
+    };
+    window.addEventListener("unio-inquiry", openInquiry);
+    return () => window.removeEventListener("unio-inquiry", openInquiry);
+  }, []);
   const download = (data: FormData) => {
     const blob = new Blob([inquiryText(data)], {
       type: "text/plain;charset=utf-8",
@@ -22,36 +59,66 @@ export function Contact() {
   };
   return (
     <section id="contact" className="contact-section">
-      <div className="container contact-inner">
-        <div className="contact-decor" aria-hidden="true">
-          <i />
-          <i />
+      <div className="container contact-studio">
+        <div className="contact-studio-copy">
+          <p className="eyebrow">{t.contactLabel}</p>
+          <h2>
+            {language === "mn" ? (
+              <>
+                Таны дараагийн санааг
+                <br />
+                <span>хамтдаа бүтээе.</span>
+              </>
+            ) : (
+              <>
+                Your next idea.
+                <br />
+                <span>Let’s build it together.</span>
+              </>
+            )}
+          </h2>
+          <p className="contact-studio-description">{t.contactText}</p>
+          <button
+            className="button contact-studio-button"
+            onClick={() => {
+              setStatus("");
+              dialog.current?.showModal();
+            }}
+          >
+            {t.start}
+            <Arrow />
+          </button>
+          <p className="contact-studio-note">{t.contactSmall}</p>
         </div>
-        <p className="eyebrow">
-          <span />
-          {t.contactLabel}
-        </p>
-        <h2>
-          {t.contactTitle[0]}
-          <br />
-          {t.contactTitle[1]}
-        </h2>
-        <p className="contact-description">{t.contactText}</p>
-        <button
-          className="button button-white"
-          onClick={() => {
-            setStatus("");
-            dialog.current?.showModal();
-          }}
-        >
-          {t.start}
-          <Arrow />
-        </button>
-        <p className="contact-small">{t.contactSmall}</p>
-        <a className="contact-email" href={`mailto:${contactEmail}`}>
-          {contactEmail}
-          <Arrow diagonal />
-        </a>
+        <div className="contact-studio-links">
+          <p className="contact-links-label">
+            {language === "mn" ? "Шууд холбогдох" : "Get in touch"}
+          </p>
+          <a href={contactPhoneHref} className="contact-studio-phone">
+            <span>
+              <small>{language === "mn" ? "Утас" : "Phone"}</small>
+              <strong>
+                {contactPhone.slice(0, 4)} {contactPhone.slice(4)}
+              </strong>
+            </span>
+            <Arrow diagonal />
+          </a>
+          <a href={`mailto:${contactEmail}`} className="contact-studio-email">
+            <span>
+              <small>{language === "mn" ? "И-мэйл" : "Email"}</small>
+              <strong>{contactEmail}</strong>
+            </span>
+            <Arrow diagonal />
+          </a>
+          <div className="contact-studio-socials">
+            {instagramUrl && (
+              <ExternalLink href={instagramUrl}>Instagram</ExternalLink>
+            )}
+            {facebookUrl && (
+              <ExternalLink href={facebookUrl}>Facebook</ExternalLink>
+            )}
+          </div>
+        </div>
       </div>
       <dialog
         ref={dialog}
@@ -82,6 +149,42 @@ export function Contact() {
               } else download(data);
             }}
           >
+            {selection && selectedIndex >= 0 && (
+              <div className="inquiry-package">
+                <strong>
+                  {p.inquiryLabel}: {p.names[selectedIndex]}
+                </strong>
+                <span>
+                  {p.paymentLabel}: {p[selection.payment]}
+                </span>
+                {selectedAddon && (
+                  <>
+                    <span>
+                      {scopeCopy[language].selectedAddon}:{" "}
+                      {selectedAddon.name[language]}
+                    </span>
+                    <input
+                      type="hidden"
+                      name="addon"
+                      value={selectedAddon.name[language]}
+                    />
+                  </>
+                )}
+                <button type="button" onClick={() => setSelection(null)}>
+                  {p.clear}
+                </button>
+                <input
+                  type="hidden"
+                  name="package"
+                  value={p.names[selectedIndex]}
+                />
+                <input
+                  type="hidden"
+                  name="payment"
+                  value={p[selection.payment]}
+                />
+              </div>
+            )}
             <div className="form-row">
               <label>
                 {t.name}
@@ -117,7 +220,18 @@ export function Contact() {
               aria-label={t.need}
               name="service"
               required
-              defaultValue=""
+              value={
+                serviceIndex === ""
+                  ? ""
+                  : [...t.serviceNames, t.unsure][Number(serviceIndex)]
+              }
+              onChange={(event) =>
+                setServiceIndex(
+                  String(
+                    [...t.serviceNames, t.unsure].indexOf(event.target.value),
+                  ),
+                )
+              }
             >
               <option value="" disabled>
                 {t.need}

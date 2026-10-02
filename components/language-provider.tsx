@@ -29,7 +29,13 @@ const LanguageContext = createContext({
     void _language;
   },
 });
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
+export function LanguageProvider({
+  children,
+  page = "home",
+}: {
+  children: React.ReactNode;
+  page?: "home" | "pricing";
+}) {
   const language = useSyncExternalStore(
     subscribe,
     getSnapshot,
@@ -47,17 +53,25 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = language;
     document.title =
-      language === "mn"
-        ? "UNIO — Website, Booking System & Business Software"
-        : "UNIO — Websites & Business Software";
+      page === "pricing"
+        ? language === "mn"
+          ? "UNIO — Үнэ, багц ба нэмэлт хөгжүүлэлт"
+          : "UNIO — Pricing & Development Packages"
+        : language === "mn"
+          ? "UNIO — Website, Booking System & Business Software"
+          : "UNIO — Websites & Business Software";
     const description = document.querySelector('meta[name="description"]');
     description?.setAttribute(
       "content",
-      language === "mn"
-        ? "Бизнесийн вэбсайт, онлайн цаг захиалгын систем, удирдлагын платформ болон тусгай программ хангамжийн хөгжүүлэлт."
-        : "Websites, online booking systems, admin platforms and custom software for your business.",
+      page === "pricing"
+        ? language === "mn"
+          ? "Вэбсайт, системийн багц, төлбөрийн сонголт болон нэмэлт хөгжүүлэлт."
+          : "Website and software packages, payment options, and additional development."
+        : language === "mn"
+          ? "Бизнесийн вэбсайт, онлайн цаг захиалгын систем, удирдлагын платформ болон тусгай программ хангамжийн хөгжүүлэлт."
+          : "Websites, online booking systems, admin platforms and custom software for your business.",
     );
-  }, [language]);
+  }, [language, page]);
   return (
     <LanguageContext.Provider
       value={{ language, t: copy[language], setLanguage }}

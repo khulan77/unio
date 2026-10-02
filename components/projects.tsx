@@ -1,4 +1,5 @@
 "use client";
+import { CaseStudy } from "./case-study";
 import Image from "next/image";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { projects, type Project } from "@/lib/projects";
@@ -194,6 +195,7 @@ export function Projects() {
             </div>
           </div>
         </div>
+        <CaseStudy compact />
         <div className="work-endnote">
           <p>
             {t.trust[0]} {t.trust[2]}

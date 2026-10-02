@@ -1,7 +1,7 @@
 export type Language = "mn" | "en";
 export const copy = {
   mn: {
-    nav: ["Ажлууд", "Үйлчилгээ", "Бидний тухай", "Холбоо барих"],
+    nav: ["Ажлууд", "Үйлчилгээ", "Үнэ", "Бидний тухай", "Холбоо барих"],
     start: "Төслөө ярилцах",
     skip: "Үндсэн агуулга руу",
     menu: "Цэс нээх",
@@ -78,16 +78,15 @@ export const copy = {
       "Organic Care-ийн админ орчин — салбар, мастер болон өдрийн цаг захиалгын нэгдсэн хуваарь.",
     caseImageAlt:
       "Organic Care админ систем: гурван салбарын сонголт, мастеруудын өдрийн цаг захиалгын хуанли",
-    aboutLabel: "04 / UNIO-ИЙН АРД",
-    aboutTitle: "Таны санаа. Миний ур чадвар.",
-    hello: "Сайн байна уу, намайг Хулан гэдэг.",
+    aboutLabel: "03 / МАНАЙ БАГ",
+    aboutTitle: "Таны санаа. Манай багийн шийдэл.",
+    teamIntro: "Бид бол UNIO баг хамт олон.",
     aboutText:
-      "Би бизнесүүдэд вэбсайт болон вэб систем хөгжүүлдэг full-stack хөгжүүлэгч. UNIO-г бизнесийн бодит асуудлыг программ хангамжаар илүү энгийн, цэгцтэй шийдэх зорилгоор хөгжүүлж байна.",
-    founder: "ҮҮСГЭН БАЙГУУЛАГЧ · FULL-STACK ХӨГЖҮҮЛЭГЧ",
+      "Бид бизнесүүдэд вэбсайт, цаг захиалгын систем болон тусгай программ хангамжийг хамтран бүтээдэг баг. Дизайн, хөгжүүлэлт, туршилтыг нэг зорилгын дор нэгтгэж, бизнесийн бодит асуудлыг энгийн, цэгцтэй шийдлээр шийдэхийг зорьдог.",
     portfolio: "Хувийн портфолио үзэх",
     purpose: ["ЗОРИЛГОТОЙ", "ХӨГЖҮҮЛЭЛТ."],
-    founderNote:
-      "Эхний ярианаас нээлт хүртэл — хөгжүүлэгчтэйгээ шууд хамтарна.",
+    teamNote:
+      "Эхний уулзалтаас нэвтрүүлэлт хүртэл — манай баг тантай шууд хамтран ажиллана.",
     processTitle: "Тодорхой үйл явц. Хамтын үр дүн.",
     processNames: ["Ойлгох", "Төлөвлөх", "Хөгжүүлэх", "Нэвтрүүлэх"],
     processTexts: [
@@ -101,7 +100,6 @@ export const copy = {
     contactText:
       "Вэбсайт, цаг захиалга эсвэл тусгай программ — яг юу хэрэгтэйгээ мэдэхгүй байсан ч болно.",
     contactSmall: "Том санаа ч бай, жижиг эхлэл ч бай.",
-    footer: "Монголд, сэтгэл шингээн бүтээв.",
     formTitle: "Төслийнхөө тухай ярилцъя.",
     formIntro:
       "Хэдэн мэдээллээ үлдээгээрэй. Эндээс таны төслийн эхний алхам эхэлнэ.",
@@ -145,7 +143,7 @@ export const copy = {
     },
   },
   en: {
-    nav: ["Work", "Services", "About", "Contact"],
+    nav: ["Work", "Services", "Pricing", "About", "Contact"],
     start: "Start a project",
     skip: "Skip to content",
     menu: "Open menu",
@@ -221,16 +219,15 @@ export const copy = {
       "Organic Care’s admin workspace — branch selection, staff schedules and daily appointments in one view.",
     caseImageAlt:
       "Organic Care admin system with three branch options and daily appointments arranged by staff member",
-    aboutLabel: "04 / BEHIND UNIO",
-    aboutTitle: "Your vision. My craft.",
-    hello: "Hi, I’m Khulan.",
+    aboutLabel: "03 / OUR TEAM",
+    aboutTitle: "Your vision. Our team’s craft.",
+    teamIntro: "We’re the team behind UNIO.",
     aboutText:
-      "I’m a full-stack developer building websites and software systems for real businesses. I started UNIO to turn complicated business processes into simpler digital experiences.",
-    founder: "FOUNDER · FULL-STACK DEVELOPER",
+      "We’re a team building websites, booking systems and custom software for businesses. We bring design, development and testing together to turn real business problems into clear, practical digital solutions.",
     portfolio: "View personal portfolio",
     purpose: ["SOFTWARE", "WITH PURPOSE."],
-    founderNote:
-      "From the first conversation to launch — work directly with your developer.",
+    teamNote:
+      "From the first conversation to launch — work directly with our team.",
     processTitle: "A clear process. A shared outcome.",
     processNames: ["Discover", "Design", "Build", "Launch"],
     processTexts: [
@@ -244,7 +241,6 @@ export const copy = {
     contactText:
       "Website, booking system or custom software — you don’t need to know the technical solution yet.",
     contactSmall: "Big ideas. Small beginnings. All welcome.",
-    footer: "Built with care in Mongolia.",
     formTitle: "Let’s talk about your project.",
     formIntro: "A few details are all we need to start the conversation.",
     name: "Your name",

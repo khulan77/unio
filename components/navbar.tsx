@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "./language-provider";
 import { Arrow, Logo } from "./ui";
-const anchors = ["work", "services", "about", "contact"];
+const anchors = ["/#work", "/#services", "/pricing", "/#about", "#contact"];
 export function Navbar() {
   const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
@@ -22,22 +23,22 @@ export function Navbar() {
   }, []);
   return (
     <>
-      <a className="skip-link" href="#main">
+      <Link className="skip-link" href="#main">
         {t.skip}
-      </a>
+      </Link>
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <div className="container nav-inner">
-          <a href="#" aria-label="UNIO" onClick={() => setOpen(false)}>
+          <Link href="/" aria-label="UNIO" onClick={() => setOpen(false)}>
             <Logo />
-          </a>
+          </Link>
           <nav
             className="desktop-nav"
             aria-label={language === "mn" ? "Үндсэн цэс" : "Main navigation"}
           >
             {t.nav.map((label, i) => (
-              <a href={`#${anchors[i]}`} key={label}>
+              <Link href={anchors[i]} key={label}>
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="nav-actions">
@@ -61,10 +62,10 @@ export function Navbar() {
                 EN
               </button>
             </div>
-            <a href="#contact" className="button button-small nav-cta">
+            <Link href="#contact" className="button button-small nav-cta">
               {t.start}
               <Arrow />
-            </a>
+            </Link>
             <button
               className={`menu-toggle ${open ? "is-open" : ""}`}
               aria-label={open ? t.close : t.menu}
@@ -86,14 +87,10 @@ export function Navbar() {
           }
         >
           {t.nav.map((label, i) => (
-            <a
-              href={`#${anchors[i]}`}
-              key={label}
-              onClick={() => setOpen(false)}
-            >
+            <Link href={anchors[i]} key={label} onClick={() => setOpen(false)}>
               {label}
               <Arrow diagonal />
-            </a>
+            </Link>
           ))}
         </nav>
       </header>

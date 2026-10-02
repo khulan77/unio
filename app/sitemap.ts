@@ -7,6 +7,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
           changeFrequency: "monthly",
           priority: 1,
         },
+        {
+          url: new URL("/pricing", process.env.NEXT_PUBLIC_SITE_URL).href,
+          changeFrequency: "monthly",
+          priority: 0.8,
+        },
       ]
     : [];
 }

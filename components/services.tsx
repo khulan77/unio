@@ -1,6 +1,6 @@
 "use client";
 import { useLanguage } from "./language-provider";
-import { Arrow, Icon, Logo, SectionHeading } from "./ui";
+import { Arrow, Icon, SectionHeading } from "./ui";
 export function Services() {
   const { t } = useLanguage();
   return (
@@ -26,42 +26,6 @@ export function Services() {
               </div>
             </a>
           ))}
-        </div>
-        <div className="philosophy">
-          <div>
-            <h3>
-              {t.philosophy[0]}
-              <br />
-              <span>{t.philosophy[1]}</span>
-            </h3>
-            <p>{t.philosophyText}</p>
-          </div>
-          <div className="system-flow">
-            <div className="scattered-tools">
-              {t.tools.map((tool, i) => (
-                <span key={tool}>
-                  <Icon name={["web", "grid", "people", "settings"][i]} />
-                  {tool}
-                </span>
-              ))}
-            </div>
-            <div className="flow-lines">
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-            <div className="flow-logo">
-              <Logo />
-            </div>
-            <div className="flow-output">
-              <span />
-              <p>
-                <Icon name="check" />
-                {t.organized}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

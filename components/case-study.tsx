@@ -3,8 +3,28 @@ import { useLanguage } from "./language-provider";
 import { ExternalLink, Icon } from "./ui";
 import { organicCareUrl } from "@/lib/projects";
 import Image from "next/image";
-export function CaseStudy() {
+export function CaseStudy({ compact = false }: { compact?: boolean }) {
   const { t } = useLanguage();
+  if (compact)
+    return (
+      <aside className="case-summary">
+        <Image
+          src="/projects/organic-care.png"
+          alt={t.caseImageAlt}
+          width={2720}
+          height={1562}
+          sizes="(max-width: 600px) 90vw, 240px"
+        />
+        <div>
+          <span className="eyebrow">ORGANIC CARE</span>
+          <h3>{t.caseTitle.join(" ")}</h3>
+          <p>{t.caseDescription}</p>
+        </div>
+        <ExternalLink href={organicCareUrl} className="text-link">
+          {t.caseLink}
+        </ExternalLink>
+      </aside>
+    );
   return (
     <section className="container section case-section">
       <p className="eyebrow">{t.caseLabel}</p>
