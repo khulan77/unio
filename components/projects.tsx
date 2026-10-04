@@ -1,7 +1,7 @@
 "use client";
 import { CaseStudy } from "./case-study";
 import Image from "next/image";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "./language-provider";
 import { ExternalLink, Arrow } from "./ui";
@@ -9,9 +9,11 @@ import { InlineProjectVideo } from "./project-video";
 export function ProjectPreview({
   project,
   large = false,
+  onEnded,
 }: {
   project: Project;
   large?: boolean;
+  onEnded?: () => void;
 }) {
   return (
     <div
@@ -28,7 +30,7 @@ export function ProjectPreview({
           <span>↗</span>
         </div>
         <div className="project-image">
-          <InlineProjectVideo project={project} />
+          <InlineProjectVideo project={project} onEnded={onEnded} />
         </div>
       </div>
     </div>
@@ -37,6 +39,56 @@ export function ProjectPreview({
 export function Projects() {
   const { t, language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
+  const stage = useRef<HTMLDivElement>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const activeIndexRef = useRef(activeIndex);
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+  useEffect(() => {
+    const element = stage.current;
+    if (!element) return;
+    let total = 0;
+    let lastEvent = 0;
+    let locked = false;
+    const wheel = (event: WheelEvent) => {
+      if (event.ctrlKey) return;
+      const now = performance.now();
+      if (now - lastEvent > 180) {
+        total = 0;
+        locked = false;
+      }
+      lastEvent = now;
+      const delta =
+        (Math.abs(event.deltaX) > Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY) *
+        (event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? element.clientHeight
+            : 1);
+      if (!delta) return;
+      const direction = delta > 0 ? 1 : -1;
+      if (
+        (activeIndexRef.current === 0 && direction < 0) ||
+        (activeIndexRef.current === projects.length - 1 && direction > 0)
+      )
+        return;
+      event.preventDefault();
+      if (locked) return;
+      if (Math.sign(total) !== direction) total = 0;
+      total += delta;
+      if (Math.abs(total) >= 60) {
+        locked = true;
+        setActiveIndex((index) =>
+          Math.max(0, Math.min(projects.length - 1, index + direction)),
+        );
+      }
+    };
+    element.addEventListener("wheel", wheel, { passive: false });
+    return () => element.removeEventListener("wheel", wheel);
+  }, []);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const active = projects[activeIndex];
   const selectRelative = (step: number) =>
@@ -109,10 +161,9 @@ export function Projects() {
                   aria-selected={activeIndex === index}
                   aria-controls="project-preview-panel"
                   tabIndex={activeIndex === index ? 0 : -1}
-                  onPointerEnter={(event) => {
-                    if (event.pointerType === "mouse") setActiveIndex(index);
+                  onFocus={() => {
+                    setActiveIndex(index);
                   }}
-                  onFocus={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
                   onKeyDown={(event) => handleKeys(event, index)}
                   className="explorer-tab"
@@ -135,6 +186,29 @@ export function Projects() {
             <p className="explorer-index-note">{t.explorerHint}</p>
           </div>
           <div
+            ref={stage}
+            onTouchStart={(event) => {
+              const touch = event.touches[0];
+              touchStart.current = { x: touch.clientX, y: touch.clientY };
+            }}
+            onTouchEnd={(event) => {
+              const start = touchStart.current;
+              touchStart.current = null;
+              if (!start) return;
+              const touch = event.changedTouches[0];
+              const dx = touch.clientX - start.x,
+                dy = touch.clientY - start.y;
+              if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5)
+                setActiveIndex((index) =>
+                  Math.max(
+                    0,
+                    Math.min(projects.length - 1, index + (dx < 0 ? 1 : -1)),
+                  ),
+                );
+            }}
+            onTouchCancel={() => {
+              touchStart.current = null;
+            }}
             className="explorer-stage"
             id="project-preview-panel"
             role="tabpanel"
@@ -174,7 +248,11 @@ export function Projects() {
               </div>
             </div>
             <div className="explorer-navigation">
-              <span>{t.exploreEveryProject}</span>
+              <span>
+                {language === "mn"
+                  ? "Scroll хийж эсвэл хажуу тийш шударч үзээрэй"
+                  : "Scroll or swipe to explore"}
+              </span>
               <div>
                 <button
                   type="button"

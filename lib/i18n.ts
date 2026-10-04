@@ -20,7 +20,8 @@ export const copy = {
     workHeading: ["Санаа бүр өөр.", "Шийдэл бүр онцгой."],
     workCollection: "БҮХ ТӨСӨЛ",
     exploreProjects: "ТӨСЛҮҮДИЙГ ҮЗЭХ",
-    explorerHint: "Нэр дээр курсороо аваачих эсвэл дарж төслөө сонгоорой.",
+    explorerHint:
+      "Карт дээр scroll хийж төслүүдийг үзээрэй. Утсан дээр хажуу тийш шударна.",
     exploreEveryProject: "Дараагийн санааг нээгээрэй.",
     previousProject: "Өмнөх төсөл",
     nextProject: "Дараагийн төсөл",
@@ -162,7 +163,8 @@ export const copy = {
     workHeading: ["Different ideas.", "Distinct solutions."],
     workCollection: "ALL PROJECTS",
     exploreProjects: "EXPLORE THE WORK",
-    explorerHint: "Hover over a name or tap to explore the project.",
+    explorerHint:
+      "Scroll over the card to explore projects, or swipe sideways on your phone.",
     exploreEveryProject: "Discover the next idea.",
     previousProject: "Previous project",
     nextProject: "Next project",

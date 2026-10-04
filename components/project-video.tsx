@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
 import { useLanguage } from "./language-provider";
 
-export function InlineProjectVideo({ project }: { project: Project }) {
+export function InlineProjectVideo({
+  project,
+  onEnded,
+}: {
+  project: Project;
+  onEnded?: () => void;
+}) {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useRef(false);
@@ -65,7 +71,15 @@ export function InlineProjectVideo({ project }: { project: Project }) {
       <video
         ref={videoRef}
         muted
-        loop
+        loop={!onEnded}
+        onEnded={() => {
+          if (
+            !document.hidden &&
+            inView.current &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          )
+            onEnded?.();
+        }}
         playsInline
         preload="none"
         poster={project.image ?? `/projects/${project.id}.webp`}

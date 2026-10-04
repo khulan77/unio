@@ -4400,3 +4400,27 @@ body:has(.contact-dialog[open]) {
   background: #344d3f;
   color: white;
 }
+
+.explorer-navigation .project-auto-toggle {
+  width: auto;
+  height: auto;
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+.explorer-navigation .project-auto-toggle[aria-pressed="true"] {
+  background: #edf2e9;
+  color: #344d3f;
+  border-color: #bccbbc;
+}
+.explorer-media { animation: project-card-enter .4s ease-out; }
+@keyframes project-card-enter {
+  from { opacity: .4; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explorer-media { animation: none; }
+}
