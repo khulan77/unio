@@ -40,4 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 !.env.example
-public/projects/videos/
+# Temporary video encodes
+public/projects/videos/*.small.mp4
