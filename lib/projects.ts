@@ -27,7 +27,7 @@ export const projects: Project[] = [
   },
   {
     id: "dental",
-    image: "/projects/dental-3ef26a8e.webp",
+    image: "/projects/dental-3ef26a8e.png",
     video: { src: "/projects/videos/dental.mp4", duration: "0:12" },
     name: "Dental Clinic",
     url: "https://dental-clinic77-green.vercel.app/",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
   },
   {
     id: "coffee",
-    image: "/projects/coffee-56d21a35.webp",
+    image: "/projects/coffee-56d21a35.png",
     video: { src: "/projects/videos/coffee.mp4", duration: "0:12" },
     name: "Afterglow Coffee",
     url: "https://coffee-shop-zeta-seven.vercel.app/",
