@@ -17,7 +17,7 @@ export function Footer() {
             <Link
               key={name}
               href={
-                ["/#work", "/#services", "/pricing", "/#about", "#contact"][i]
+                ["/#work", "/pricing", "/#about", "#contact"][i]
               }
             >
               {name}

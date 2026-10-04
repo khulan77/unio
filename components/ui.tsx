@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 export function Arrow({
   diagonal = false,
   down = false,
@@ -34,9 +35,8 @@ export function Arrow({
 }
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <span className={`logo ${compact ? "compact" : ""}`}>
-      unio
-      <span className="logo-dot" />
+    <span className={`logo brand-image ${compact ? "compact" : ""}`}>
+      <Image src="/projects/unio.png" alt="UNIO" width={1304} height={1286} unoptimized />
     </span>
   );
 }

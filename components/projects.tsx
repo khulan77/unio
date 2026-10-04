@@ -1,7 +1,6 @@
 "use client";
 import { CaseStudy } from "./case-study";
-import Image from "next/image";
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "./language-provider";
 import { ExternalLink, Arrow } from "./ui";
@@ -9,11 +8,11 @@ import { InlineProjectVideo } from "./project-video";
 export function ProjectPreview({
   project,
   large = false,
-  onEnded,
+  active = true,
 }: {
   project: Project;
   large?: boolean;
-  onEnded?: () => void;
+  active?: boolean;
 }) {
   return (
     <div
@@ -30,7 +29,7 @@ export function ProjectPreview({
           <span>↗</span>
         </div>
         <div className="project-image">
-          <InlineProjectVideo project={project} onEnded={onEnded} />
+          <InlineProjectVideo project={project} active={active} />
         </div>
       </div>
     </div>
@@ -39,80 +38,35 @@ export function ProjectPreview({
 export function Projects() {
   const { t, language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
-  const stage = useRef<HTMLDivElement>(null);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const activeIndexRef = useRef(activeIndex);
+  const cards = useRef<(HTMLElement | null)[]>([]);
   useEffect(() => {
-    activeIndexRef.current = activeIndex;
-  }, [activeIndex]);
-  useEffect(() => {
-    const element = stage.current;
-    if (!element) return;
-    let total = 0;
-    let lastEvent = 0;
-    let locked = false;
-    const wheel = (event: WheelEvent) => {
-      if (event.ctrlKey) return;
-      const now = performance.now();
-      if (now - lastEvent > 180) {
-        total = 0;
-        locked = false;
-      }
-      lastEvent = now;
-      const delta =
-        (Math.abs(event.deltaX) > Math.abs(event.deltaY)
-          ? event.deltaX
-          : event.deltaY) *
-        (event.deltaMode === 1
-          ? 16
-          : event.deltaMode === 2
-            ? element.clientHeight
-            : 1);
-      if (!delta) return;
-      const direction = delta > 0 ? 1 : -1;
-      if (
-        (activeIndexRef.current === 0 && direction < 0) ||
-        (activeIndexRef.current === projects.length - 1 && direction > 0)
-      )
-        return;
-      event.preventDefault();
-      if (locked) return;
-      if (Math.sign(total) !== direction) total = 0;
-      total += delta;
-      if (Math.abs(total) >= 60) {
-        locked = true;
-        setActiveIndex((index) =>
-          Math.max(0, Math.min(projects.length - 1, index + direction)),
-        );
-      }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      let next = 0;
+      cards.current.forEach((card, index) => {
+        if (
+          card &&
+          card.getBoundingClientRect().top < window.innerHeight * 0.55
+        )
+          next = index;
+      });
+      setActiveIndex(next);
     };
-    element.addEventListener("wheel", wheel, { passive: false });
-    return () => element.removeEventListener("wheel", wheel);
+    const scroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", scroll, { passive: true });
+    window.addEventListener("resize", scroll);
+    return () => {
+      window.removeEventListener("scroll", scroll);
+      window.removeEventListener("resize", scroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
-  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const active = projects[activeIndex];
-  const selectRelative = (step: number) =>
-    setActiveIndex(
-      (index) => (index + step + projects.length) % projects.length,
-    );
-  const handleKeys = (
-    event: KeyboardEvent<HTMLButtonElement>,
-    index: number,
-  ) => {
-    let next = index;
-    if (event.key === "ArrowDown" || event.key === "ArrowRight")
-      next = (index + 1) % projects.length;
-    else if (event.key === "ArrowUp" || event.key === "ArrowLeft")
-      next = (index - 1 + projects.length) % projects.length;
-    else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = projects.length - 1;
-    else return;
-    event.preventDefault();
-    setActiveIndex(next);
-    tabs.current[next]?.focus();
-  };
   return (
-    <section id="work" className="work-section work-showcase">
+    <section id="work" className="work-section work-showcase stacked-work">
       <div className="container">
         <div className="work-chapter-line">
           <p className="eyebrow">
@@ -132,146 +86,46 @@ export function Projects() {
           <div>
             <p>{t.workIntro}</p>
             <p className="work-video-hint">
-              <span className="blue-dot" />
-              {t.videoHint}
+              {language === "mn"
+                ? "Доош гүйлгээд манай төслүүдтэй танилцаарай."
+                : "Scroll down to explore our projects."}
             </p>
           </div>
         </div>
-        <div className="project-explorer">
-          <div className="explorer-index">
-            <div className="explorer-index-heading">
-              <span>{t.exploreProjects}</span>
-              <span>{String(projects.length).padStart(2, "0")}</span>
-            </div>
-            <div
-              role="tablist"
-              aria-label={t.exploreProjects}
-              aria-orientation="vertical"
-              className="explorer-tabs"
+        <div className="project-card-stack">
+          {projects.map((project, index) => (
+            <article
+              key={project.id}
+              ref={(element) => {
+                cards.current[index] = element;
+              }}
+              className="stacked-project-card"
+              style={{ zIndex: index + 1 }}
+              aria-labelledby={"stack-title-" + project.id}
             >
-              {projects.map((project, index) => (
-                <button
-                  key={project.id}
-                  ref={(element) => {
-                    tabs.current[index] = element;
-                  }}
-                  type="button"
-                  role="tab"
-                  id={`project-tab-${project.id}`}
-                  aria-selected={activeIndex === index}
-                  aria-controls="project-preview-panel"
-                  tabIndex={activeIndex === index ? 0 : -1}
-                  onFocus={() => {
-                    setActiveIndex(index);
-                  }}
-                  onClick={() => setActiveIndex(index)}
-                  onKeyDown={(event) => handleKeys(event, index)}
-                  className="explorer-tab"
-                >
-                  <span className="explorer-tab-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <Image
-                    src={project.image ?? `/projects/${project.id}.webp`}
-                    alt=""
-                    width={52}
-                    height={38}
-                    sizes="52px"
-                  />
-                  <span className="explorer-tab-name">{project.name}</span>
-                  <Arrow />
-                </button>
-              ))}
-            </div>
-            <p className="explorer-index-note">{t.explorerHint}</p>
-          </div>
-          <div
-            ref={stage}
-            onTouchStart={(event) => {
-              const touch = event.touches[0];
-              touchStart.current = { x: touch.clientX, y: touch.clientY };
-            }}
-            onTouchEnd={(event) => {
-              const start = touchStart.current;
-              touchStart.current = null;
-              if (!start) return;
-              const touch = event.changedTouches[0];
-              const dx = touch.clientX - start.x,
-                dy = touch.clientY - start.y;
-              if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5)
-                setActiveIndex((index) =>
-                  Math.max(
-                    0,
-                    Math.min(projects.length - 1, index + (dx < 0 ? 1 : -1)),
-                  ),
-                );
-            }}
-            onTouchCancel={() => {
-              touchStart.current = null;
-            }}
-            className="explorer-stage"
-            id="project-preview-panel"
-            role="tabpanel"
-            aria-labelledby={`project-tab-${active.id}`}
-            tabIndex={0}
-          >
-            <div className="explorer-stage-top">
-              <span>
-                <span className="blue-dot" />
-                {t.watchVideo}
-              </span>
-              <span>
-                {String(activeIndex + 1).padStart(2, "0")} /{" "}
-                {String(projects.length).padStart(2, "0")}
-              </span>
-            </div>
-            <div className="explorer-media" key={active.id}>
-              <ProjectPreview project={active} large />
-            </div>
-            <div className="explorer-details">
-              <div>
-                <p className="project-meta">
-                  {active.category[language]}
-                  {active.status !== "project" && (
-                    <span className="status-tag">
-                      {active.status === "demo" ? t.demo : t.experiment}
-                    </span>
-                  )}
+              <div className="stacked-project-copy">
+                <p className="stacked-project-number">
+                  {String(index + 1).padStart(2, "0")} /{" "}
+                  {String(projects.length).padStart(2, "0")}
                 </p>
-                <h3>{active.name}</h3>
-                <p className="explorer-description">
-                  {active.description[language]}
+                <p className="project-meta">{project.category[language]}</p>
+                <h3 id={"stack-title-" + project.id}>{project.name}</h3>
+                <p className="stacked-project-description">
+                  {project.description[language]}
                 </p>
-                <ExternalLink href={active.url} className="text-link">
+                <ExternalLink href={project.url} className="text-link">
                   {t.live}
                 </ExternalLink>
               </div>
-            </div>
-            <div className="explorer-navigation">
-              <span>
-                {language === "mn"
-                  ? "Scroll хийж эсвэл хажуу тийш шударч үзээрэй"
-                  : "Scroll or swipe to explore"}
-              </span>
-              <div>
-                <button
-                  type="button"
-                  aria-label={t.previousProject}
-                  onClick={() => selectRelative(-1)}
-                  className="explorer-prev"
-                >
-                  <Arrow />
-                </button>
-                <button
-                  type="button"
-                  aria-label={t.nextProject}
-                  onClick={() => selectRelative(1)}
-                >
-                  <Arrow />
-                </button>
+              <div className="stacked-project-media">
+                <ProjectPreview
+                  project={project}
+                  large
+                  active={index === activeIndex}
+                />
               </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
         <CaseStudy compact />
         <div className="work-endnote">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "./language-provider";
 import { Arrow, Logo } from "./ui";
-const anchors = ["/#work", "/#services", "/pricing", "/#about", "#contact"];
+const anchors = ["/#work", "/pricing", "/#about", "#contact"];
 export function Navbar() {
   const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);

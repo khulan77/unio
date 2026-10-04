@@ -6,9 +6,11 @@ import { useLanguage } from "./language-provider";
 export function InlineProjectVideo({
   project,
   onEnded,
+  active = true,
 }: {
   project: Project;
   onEnded?: () => void;
+  active?: boolean;
 }) {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,6 +25,7 @@ export function InlineProjectVideo({
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => {
       if (
+        active &&
         inView.current &&
         !document.hidden &&
         !userPaused.current &&
@@ -51,7 +54,7 @@ export function InlineProjectVideo({
       motion.removeEventListener("change", update);
       video.pause();
     };
-  }, [project.video.src]);
+  }, [project.video.src, active]);
 
   const toggle = () => {
     const video = videoRef.current;

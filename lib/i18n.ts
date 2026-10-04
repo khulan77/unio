@@ -1,7 +1,7 @@
 export type Language = "mn" | "en";
 export const copy = {
   mn: {
-    nav: ["Ажлууд", "Үйлчилгээ", "Үнэ", "Бидний тухай", "Холбоо барих"],
+    nav: ["Ажлууд", "Үнэ", "Бидний тухай", "Холбоо барих"],
     start: "Төслөө ярилцах",
     skip: "Үндсэн агуулга руу",
     menu: "Цэс нээх",
@@ -79,7 +79,7 @@ export const copy = {
       "Organic Care-ийн админ орчин — салбар, мастер болон өдрийн цаг захиалгын нэгдсэн хуваарь.",
     caseImageAlt:
       "Organic Care админ систем: гурван салбарын сонголт, мастеруудын өдрийн цаг захиалгын хуанли",
-    aboutLabel: "03 / МАНАЙ БАГ",
+    aboutLabel: "02 / МАНАЙ БАГ",
     aboutTitle: "Таны санаа. Манай багийн шийдэл.",
     teamIntro: "Бид бол UNIO баг хамт олон.",
     aboutText:
@@ -144,7 +144,7 @@ export const copy = {
     },
   },
   en: {
-    nav: ["Work", "Services", "Pricing", "About", "Contact"],
+    nav: ["Work", "Pricing", "About", "Contact"],
     start: "Start a project",
     skip: "Skip to content",
     menu: "Open menu",
@@ -221,7 +221,7 @@ export const copy = {
       "Organic Care’s admin workspace — branch selection, staff schedules and daily appointments in one view.",
     caseImageAlt:
       "Organic Care admin system with three branch options and daily appointments arranged by staff member",
-    aboutLabel: "03 / OUR TEAM",
+    aboutLabel: "02 / OUR TEAM",
     aboutTitle: "Your vision. Our team’s craft.",
     teamIntro: "We’re the team behind UNIO.",
     aboutText:
