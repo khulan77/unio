@@ -121,7 +121,7 @@ export function Projects() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <Image
-                    src={`/projects/${project.id}.webp`}
+                    src={project.image ?? `/projects/${project.id}.webp`}
                     alt=""
                     width={52}
                     height={38}

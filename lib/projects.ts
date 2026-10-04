@@ -1,6 +1,7 @@
 import type { Language } from "./i18n";
 export type Project = {
   id: string;
+  image?: string;
   name: string;
   url: string;
   category: Record<Language, string>;
@@ -26,6 +27,7 @@ export const projects: Project[] = [
   },
   {
     id: "dental",
+    image: "/projects/dental-3ef26a8e.webp",
     video: { src: "/projects/videos/dental.mp4", duration: "0:12" },
     name: "Dental Clinic",
     url: "https://dental-clinic77-green.vercel.app/",
@@ -53,6 +55,7 @@ export const projects: Project[] = [
   },
   {
     id: "coffee",
+    image: "/projects/coffee-56d21a35.webp",
     video: { src: "/projects/videos/coffee.mp4", duration: "0:12" },
     name: "Afterglow Coffee",
     url: "https://coffee-shop-zeta-seven.vercel.app/",

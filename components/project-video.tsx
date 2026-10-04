@@ -68,7 +68,7 @@ export function InlineProjectVideo({ project }: { project: Project }) {
         loop
         playsInline
         preload="none"
-        poster={`/projects/${project.id}.webp`}
+        poster={project.image ?? `/projects/${project.id}.webp`}
         aria-label={`${project.name} — ${t.watchVideo}`}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
