@@ -56,6 +56,20 @@ export function Projects() {
     const scroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const measure = () => {
+      cards.current.forEach((card) => {
+        if (card)
+          card.dataset.tall = String(
+            card.offsetHeight > window.innerHeight - 110,
+          );
+      });
+    };
+    const observer = new ResizeObserver(measure);
+    cards.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+    measure();
+    window.addEventListener("resize", measure);
     update();
     window.addEventListener("scroll", scroll, { passive: true });
     window.addEventListener("resize", scroll);
@@ -63,6 +77,8 @@ export function Projects() {
       window.removeEventListener("scroll", scroll);
       window.removeEventListener("resize", scroll);
       cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
     };
   }, []);
   return (
@@ -113,6 +129,16 @@ export function Projects() {
                 <p className="stacked-project-description">
                   {project.description[language]}
                 </p>
+                <ul
+                  className="project-highlights"
+                  aria-label={
+                    language === "mn" ? "Гол боломжууд" : "Highlights"
+                  }
+                >
+                  {project.highlights[language].map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
                 <ExternalLink href={project.url} className="text-link">
                   {t.live}
                 </ExternalLink>

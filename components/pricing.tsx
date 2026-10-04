@@ -3,6 +3,7 @@ import { ServiceScope } from "./service-scope";
 import { useState } from "react";
 import {
   plans,
+  planGuide,
   pricingCopy,
   type PaymentPreference,
   type PricingInquiry,
@@ -12,6 +13,7 @@ import { Arrow, Icon, SectionHeading } from "./ui";
 export function Pricing() {
   const { language } = useLanguage();
   const p = pricingCopy[language];
+  const guide = planGuide[language];
   const [payment, setPayment] = useState<PaymentPreference>("project");
   const choose = (plan: PricingInquiry["plan"]) =>
     window.dispatchEvent(
@@ -27,27 +29,31 @@ export function Pricing() {
         description={p.intro}
         as="h1"
       />
+      <h2 className="payment-heading">{guide.paymentTitle}</h2>
       <div className="pricing-options" role="group" aria-label={p.paymentLabel}>
         <button
           type="button"
           aria-pressed={payment === "project"}
           onClick={() => setPayment("project")}
         >
-          {p.project}
+          <strong>{p.project}</strong>
+          <span>{guide.payments[0]}</span>
         </button>
         <button
           type="button"
           aria-pressed={payment === "monthly"}
           onClick={() => setPayment("monthly")}
         >
-          {p.monthly}
+          <strong>{p.monthly}</strong>
+          <span>{guide.payments[1]}</span>
         </button>
         <button
           type="button"
           aria-pressed={payment === "subscription"}
           onClick={() => setPayment("subscription")}
         >
-          {p.subscription}
+          <strong>{p.subscription}</strong>
+          <span>{guide.payments[2]}</span>
         </button>
       </div>
       <p className="pricing-payment-note" aria-live="polite">
@@ -59,10 +65,14 @@ export function Pricing() {
       </p>
       <div className="pricing-grid">
         {plans.map((plan, index) => (
-          <article className="price-card" key={plan.id}>
-            <span className="price-index">0{index + 1}</span>
+          <article
+            className={`price-card plan-tone-${index}`}
+            id={`plan-${plan.id}`}
+            key={plan.id}
+          >
+            <span className="price-index">{guide.labels[index]}</span>
             <h3>{p.names[index]}</h3>
-            <p className="price-description">{p.descriptions[index]}</p>
+            <p className="price-description">{guide.audience[index]}</p>
             <div className="price-amount">
               <span>
                 {payment === "subscription"

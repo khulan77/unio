@@ -2,6 +2,7 @@ import type { Language } from "./i18n";
 export type Project = {
   id: string;
   image?: string;
+  highlights: Record<Language, string[]>;
   name: string;
   url: string;
   category: Record<Language, string>;
@@ -12,6 +13,10 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "salon",
+    highlights: {
+      mn: ["Үйлчилгээ сонгох", "Мастер, салбар", "Цаг захиалах"],
+      en: ["Choose a service", "Specialists & branches", "Book a visit"],
+    },
     video: { src: "/projects/videos/usertal.mp4", duration: "0:42" },
     name: "Lumière Salon",
     url: "https://salon-ecru-seven.vercel.app/",
@@ -20,13 +25,17 @@ export const projects: Project[] = [
       en: "BEAUTY / BOOKING SYSTEM",
     },
     description: {
-      mn: "Үйлчилгээ, мастер, салбарын мэдээллийг цаг захиалгын үйл явцтай нэгтгэсэн салоны дижитал туршлага.",
+      mn: "Үйлчлүүлэгч үйлчилгээ, мастер, салбараа сонгоод онлайнаар цаг захиалах салоны вэбсайт.",
       en: "A salon experience that brings services, specialists, branch information and appointment booking together.",
     },
     status: "project",
   },
   {
     id: "dental",
+    highlights: {
+      mn: ["Эмнэлгийн танилцуулга", "Цаг захиалгын демо"],
+      en: ["Clinic introduction", "Booking demo"],
+    },
     image: "/projects/dental-3ef26a8e.png",
     video: { src: "/projects/videos/dental.mp4", duration: "0:12" },
     name: "Dental Clinic",
@@ -43,6 +52,10 @@ export const projects: Project[] = [
   },
   {
     id: "store",
+    highlights: {
+      mn: ["Бүтээгдэхүүн", "Хайлт", "Сагс"],
+      en: ["Products", "Search", "Shopping bag"],
+    },
     video: { src: "/projects/videos/store.mp4", duration: "0:12" },
     name: "The Everyday Store",
     url: "https://store-virid-delta-66.vercel.app/",
@@ -55,19 +68,27 @@ export const projects: Project[] = [
   },
   {
     id: "coffee",
+    highlights: {
+      mn: ["Ундааны цэс", "Онцлох бүтээгдэхүүн", "Брэндийн дизайн"],
+      en: ["Drinks menu", "Featured products", "Brand design"],
+    },
     image: "/projects/coffee-56d21a35.png",
     video: { src: "/projects/videos/coffee.mp4", duration: "0:12" },
     name: "Afterglow Coffee",
     url: "https://coffee-shop-zeta-seven.vercel.app/",
     category: { mn: "ХООЛ ҮЙЛЧИЛГЭЭ / ВЭБСАЙТ", en: "HOSPITALITY / WEBSITE" },
     description: {
-      mn: "Онцлох ундаа, цэс болон бүтээгдэхүүнийг тодотгосон кофены брэндийн вэб туршлага.",
+      mn: "Кофены газрын цэс, онцлох ундааг танилцуулах, брэндийн өнгө төрхийг илэрхийлсэн вэбсайт.",
       en: "An expressive coffee web experience with a featured drink, menu categories and product presentation.",
     },
     status: "demo",
   },
   {
     id: "education",
+    highlights: {
+      mn: ["Анги сонгох", "Сонсоод бичих", "Дадлага"],
+      en: ["Grade selection", "Dictation", "Practice"],
+    },
     video: { src: "/projects/videos/education.mp4", duration: "0:12" },
     name: "Зөв бичгийн баатар",
     url: "https://bagiin-project-last-nykf.vercel.app/",
@@ -80,6 +101,10 @@ export const projects: Project[] = [
   },
   {
     id: "astrology",
+    highlights: {
+      mn: ["Эрхэсийн зураглал", "Ордууд", "Хувийн зурхай"],
+      en: ["Birth charts", "Zodiac signs", "Personal horoscopes"],
+    },
     video: { src: "/projects/videos/astrology.mp4", duration: "0:12" },
     name: "Одон Орон",
     url: "https://astrology-alpha-five.vercel.app/",
@@ -95,6 +120,10 @@ export const projects: Project[] = [
   },
   {
     id: "movie",
+    highlights: {
+      mn: ["Кино танилцах", "Вэб апп", "Туршилтын төсөл"],
+      en: ["Movie discovery", "Web app", "Experiment"],
+    },
     video: { src: "/projects/videos/movie.mp4", duration: "0:12" },
     name: "Movie App",
     url: "https://movie-app-1ari.vercel.app/",

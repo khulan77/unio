@@ -2,144 +2,122 @@
 import { useLanguage } from "./language-provider";
 import { Arrow, Icon, Logo } from "./ui";
 export function SystemVisual() {
-  const { t } = useLanguage();
-  const u = t.ui;
+  const { language } = useLanguage();
+  const mn = language === "mn";
   return (
     <div
-      className="system-visual"
+      className="product-composition"
       role="img"
-      aria-label={`${t.tagline} — ${u.sample}`}
+      aria-label={
+        mn
+          ? "Бүх төрлийн вэбсайт, апп: танилцуулга, онлайн дэлгүүр, захиалга, сургалт болон бизнесийн системийн загвар дүрслэл"
+          : "Concept designs for a website, mobile app and admin system"
+      }
     >
-      <div className="visual-orbit orbit-one" />
-      <div className="visual-orbit orbit-two" />
-      <div className="visual-cross cross-one">+</div>
-      <div className="visual-cross cross-two">+</div>
-      <div className="dashboard">
-        <div className="window-bar">
-          <span className="window-dots">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>unio.workspace</span>
-          <Icon name="grid" />
-        </div>
-        <div className="dashboard-inner">
-          <div className="dashboard-sidebar">
-            <Logo compact />
-            <div className="side-active">
-              <Icon name="grid" />
-              {u.overview}
-            </div>
-            <div>
-              <Icon name="calendar" />
-              {u.bookings}
-            </div>
-            <div>
-              <Icon name="people" />
-              {u.customers}
-            </div>
-            <div className="side-settings">
-              <Icon name="settings" />
-              {u.settings}
-            </div>
-          </div>
-          <div className="dashboard-content">
-            <div className="dashboard-heading">
-              <div>
-                <small>{u.system}</small>
-                <h3>{u.today}</h3>
-              </div>
-              <span className="tiny-avatar">K</span>
-            </div>
-            <div className="calendar-month">
-              <span>{u.date}</span>
-              <span>‹ &nbsp; ›</span>
-            </div>
-            <div className="week-row">
-              {u.week.map((day, i) => (
-                <div key={i} className={i === 3 ? "selected-day" : ""}>
-                  <span>{day}</span>
-                  <b>{i + 12}</b>
-                </div>
-              ))}
-            </div>
-            <div className="schedule">
-              <div className="schedule-row">
-                <span>09:00</span>
-                <div className="appointment">
-                  <i />
-                  <div>
-                    <b>{u.service}</b>
-                    <small>09:00 – 10:00</small>
-                  </div>
-                  <span>↗</span>
-                </div>
-              </div>
-              <div className="schedule-row">
-                <span>10:00</span>
-                <div className="schedule-empty" />
-              </div>
-              <div className="schedule-row">
-                <span>11:00</span>
-                <div className="appointment appointment-light">
-                  <i />
-                  <div>
-                    <b>{u.online}</b>
-                    <small>11:00 – 11:30</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="product-composition-label">
+        {mn ? "ВЭБСАЙТ · АПП · СИСТЕМ" : "WEBSITES · APPS · SOFTWARE"}
       </div>
-      <div className="website-float">
-        <div className="mini-browser">
-          <span />
-          <span />
-          <span />
+      <div className="product-web" aria-hidden="true">
+        <div className="product-browser">
+          <span>● ● ●</span>
+          <span>your-brand.mn</span>
+          <Arrow diagonal />
         </div>
-        <div className="mini-site">
-          <span>STUDIO®</span>
-          <b>{u.websiteLine}</b>
-          <span className="mini-site-button">
-            {u.website}
+        <div className="product-web-body">
+          <Logo compact />
+          <small>01 / {mn ? "ВЭБСАЙТ" : "WEBSITE"}</small>
+          <h3>
+            {mn ? (
+              <>
+                Бүх төрлийн
+                <br />
+                вэбсайт, апп.
+              </>
+            ) : (
+              <>
+                Every kind of
+                <br />
+                website & app.
+              </>
+            )}
+          </h3>
+          <p className="product-brand-promise">
+            {mn ? "Таны бизнесийн шийдэл. Таны орон зай." : "Your business solution. Your own space."}
+          </p>
+          <p>
+            {mn
+              ? "Танилцуулга · Дэлгүүр · Захиалга · Сургалт"
+              : "Brand sites · Stores · Booking · Learning"}
+          </p>
+          <div className="product-web-line">
+            <span>{mn ? "Таны хэрэгцээнд тохируулна" : "Built around your needs"}</span>
             <Arrow />
-          </span>
-          <div className="mini-sculpture">
+          </div>
+          <div className="product-swatches">
             <i />
             <i />
             <i />
           </div>
         </div>
       </div>
-      <div className="booking-float">
-        <span className="booking-icon">
-          <Icon name="calendar" />
-        </span>
-        <div>
-          <b>{u.newBooking}</b>
-          <small>
-            {u.confirmed} <span>✓</span>
-          </small>
+      <div className="product-phone" aria-hidden="true">
+        <div className="product-phone-camera" />
+        <div className="product-phone-body">
+          <small>02 / {mn ? "АПП" : "APP"}</small>
+          <h3>
+            {mn ? (
+              <>
+                Таны бизнест
+                <br />
+                зориулсан шийдэл.
+              </>
+            ) : (
+              <>
+                A solution for
+                <br />
+                your business.
+              </>
+            )}
+          </h3>
+          <div className="product-app-icon">
+            <Icon name="grid" />
+          </div>
+          <div className="product-app-row">
+            <Icon name="calendar" />
+            <span>{mn ? "Миний захиалга" : "My bookings"}</span>
+          </div>
+          <div className="product-app-row">
+            <Icon name="people" />
+            <span>{mn ? "Миний бүртгэл" : "My account"}</span>
+          </div>
+          <div className="product-phone-nav">
+            <Icon name="web" />
+            <Icon name="grid" />
+            <Icon name="people" />
+          </div>
         </div>
-        <span className="notification-dot" />
       </div>
-      <div className="sync-float">
-        <span className="sync-check">
-          <Icon name="check" />
-        </span>
+      <div className="product-admin" aria-hidden="true">
         <div>
-          <b>{u.synced}</b>
-          <small>{u.connected}</small>
+          <small>03 / {mn ? "УДИРДЛАГА" : "ADMIN"}</small>
+          <h3>{mn ? "Бизнесээ нэг дороос." : "Your business, connected."}</h3>
+          <p>
+            {mn
+              ? "Хэрэглэгч · Төлбөр · Тайлан"
+              : "Customers · Payments · Reports"}
+          </p>
         </div>
-        <span className="sync-line">⌁</span>
+        <div className="product-chart">
+          {[35, 58, 46, 76, 65, 95].map((height, i) => (
+            <i key={i} style={{ height: height + "%" }} />
+          ))}
+        </div>
       </div>
-      <div className="visual-caption">
-        <span className="blue-dot" />
-        {u.sample}
-      </div>
+      <p className="product-composition-caption">
+        {mn
+          ? "Дизайн → Хөгжүүлэлт → Нэвтрүүлэлт"
+          : "Design → Development → Launch"}
+      </p>
     </div>
   );
 }

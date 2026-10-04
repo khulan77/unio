@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { plans, pricingCopy } from "@/lib/pricing";
+import { plans, pricingCopy, planGuide } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
 import { Arrow } from "./ui";
 export function PricingSummary() {
   const { language } = useLanguage();
   const p = pricingCopy[language];
+  const guide = planGuide[language];
   return (
     <section id="pricing" className="container section pricing-summary">
       <div className="pricing-summary-heading">
@@ -26,11 +27,27 @@ export function PricingSummary() {
       </div>
       <div className="pricing-summary-grid">
         {plans.map((plan, i) => (
-          <Link href="/pricing" key={plan.id}>
+          <Link
+            href={`/pricing#plan-${plan.id}`}
+            key={plan.id}
+            className={`summary-plan summary-plan-${i}`}
+          >
+            <span className="summary-plan-number">{guide.labels[i]}</span>
             <h3>{p.names[i]}</h3>
-            <span>{p.from}</span>
-            <strong>{plan.price.toLocaleString("en-US")}₮</strong>
-            <Arrow diagonal />
+            <p className="summary-audience">{guide.audience[i]}</p>
+            <div className="summary-price-block">
+              <span>{p.from}</span>
+              <strong>{plan.price.toLocaleString("en-US")}₮</strong>
+            </div>
+            <ul className="summary-features">
+              {p.features[i].slice(0, 3).map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+            <span className="summary-details">
+              {guide.details}
+              <Arrow diagonal />
+            </span>
           </Link>
         ))}
       </div>

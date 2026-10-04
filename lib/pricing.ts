@@ -244,3 +244,48 @@ export const pricingCopy = {
     clear: "Clear selection",
   },
 };
+
+export const planGuide = {
+  mn: {
+    labels: [
+      "Энгийн эхлэл",
+      "Брэндийн танилцуулга",
+      "Захиалга ба удирдлага",
+      "Танд зориулсан шийдэл",
+    ],
+    audience: [
+      "Үйлчилгээгээ онлайнаар танилцуулахад",
+      "Олон хуудастай, брэндийн вэбсайт хэрэгтэй бол",
+      "Цаг захиалга, ажилтны хуваариа удирдахад",
+      "Өөрийн үйл ажиллагаанд тохирсон систем хэрэгтэй бол",
+    ],
+    payments: [
+      "Тохирсон ажлын хүрээнд нийт үнийг гаргана.",
+      "Төслийн нийт төлбөрийг тохирсон хугацаанд хуваана.",
+      "Хөгжүүлэлт, хостинг, арчилгааг сарын үйлчилгээгээр авна.",
+    ],
+    details: "Багцад юу багтах вэ?",
+    paymentTitle: "Төлбөрөө хэрхэн хийх вэ?",
+  },
+  en: {
+    labels: [
+      "A simple start",
+      "Your brand online",
+      "Booking & management",
+      "Built around you",
+    ],
+    audience: [
+      "For introducing your services online",
+      "For a branded website with multiple pages",
+      "For managing appointments and staff schedules",
+      "For software tailored to your own operations",
+    ],
+    payments: [
+      "A total quote based on an agreed project scope.",
+      "Split the project total over an agreed schedule.",
+      "Development, hosting and maintenance as a monthly service.",
+    ],
+    details: "Explore what's included",
+    paymentTitle: "How would you like to pay?",
+  },
+};
