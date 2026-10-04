@@ -66,3 +66,9 @@ Pricing checks: lint, TypeScript and production build passed. All 24 combination
 The About section presents UNIO as a team, as confirmed by the owner, without invented member identities or headcounts. It replaces the previous individual founder introduction and signature.
 
 Contact phone: 85563793 (click to call). Instagram (`dev_code77`) and Facebook (`61575885910109`) appear in Contact and the footer. Optional `NEXT_PUBLIC_FACEBOOK_URL` and `NEXT_PUBLIC_INSTAGRAM_URL` variables override these defaults.
+
+### Direct inquiry email
+
+The form now POSTs to `/api/inquiry` instead of opening a mail application. Configure `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified Resend sender), and `CONTACT_TO_EMAIL` in `.env.local` and in deployment environment variables, then restart/redeploy. The recipient defaults to devcode549@gmail.com. Never expose the API key with a NEXT_PUBLIC_ prefix. Setup: https://resend.com/docs/send-with-nextjs
+
+Missing credentials return an error, not success. Provider acceptance shows a success message; inbox delivery still depends on the email provider. Validation and provider success/failure were tested with mocked delivery; actual delivery requires configured credentials. Add platform-level rate limiting before exposing the public endpoint to high traffic; its honeypot and origin check do not constitute a distributed rate limiter.

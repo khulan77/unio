@@ -8,7 +8,6 @@ import {
   contactPhoneHref,
   instagramUrl,
   facebookUrl,
-  inquiryMailto,
   inquiryText,
 } from "@/lib/contact";
 import { plans, pricingCopy, type PricingInquiry } from "@/lib/pricing";
@@ -22,6 +21,9 @@ export function Contact() {
   const selectedAddon = addons.find((addon) => addon.id === selection?.addon);
   const selectedIndex = plans.findIndex((plan) => plan.id === selection?.plan);
   const dialog = useRef<HTMLDialogElement>(null);
+  const sendingRef = useRef(false);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [status, setStatus] = useState("");
   useEffect(() => {
     const openInquiry = (event: Event) => {
@@ -40,6 +42,7 @@ export function Contact() {
       });
       setServiceIndex(String(plan.serviceIndex));
       setStatus("");
+      setSent(false);
       dialog.current?.showModal();
     };
     window.addEventListener("unio-inquiry", openInquiry);
@@ -82,6 +85,7 @@ export function Contact() {
             className="button contact-studio-button"
             onClick={() => {
               setStatus("");
+              setSent(false);
               dialog.current?.showModal();
             }}
           >
@@ -140,15 +144,54 @@ export function Contact() {
           <h2 id="contact-dialog-title">{t.formTitle}</h2>
           <p>{t.formIntro}</p>
           <form
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              const data = new FormData(event.currentTarget);
-              if (contactEmail) {
-                window.location.href = inquiryMailto(data);
-                setStatus(t.emailOpened);
-              } else download(data);
+              if (sendingRef.current) return;
+              const form = event.currentTarget;
+              const data = new FormData(form);
+              sendingRef.current = true;
+              setSending(true);
+              setStatus("");
+              setSent(false);
+              try {
+                const response = await fetch("/api/inquiry", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(Object.fromEntries(data)),
+                  signal: AbortSignal.timeout(20000),
+                });
+                if (!response.ok) throw new Error();
+                const result = await response.json();
+                if (!result.ok) throw new Error();
+                setSent(true);
+                setStatus(
+                  language === "mn"
+                    ? "Баярлалаа! Таны хүсэлтийг хүлээн авлаа. Өнөөдөртөө багтаан тантай эргэн холбогдоно."
+                    : "Thank you! We have received your inquiry and will get back to you today.",
+                );
+                form.reset();
+                setSelection(null);
+                setServiceIndex("");
+              } catch {
+                setStatus(
+                  language === "mn"
+                    ? "Хүсэлт илгээгдсэн нь баталгаажаагүй. Дахин оролдох эсвэл 85563793 дугаараар холбогдоорой."
+                    : "Sending could not be confirmed. Please try again or call 85563793.",
+                );
+              } finally {
+                sendingRef.current = false;
+                setSending(false);
+              }
             }}
           >
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ display: "none" }}
+            />
             {selection && selectedIndex >= 0 && (
               <div className="inquiry-package">
                 <strong>
@@ -200,7 +243,11 @@ export function Contact() {
                 <span> ({t.optional})</span>
                 <input
                   name="company"
-                  autoComplete="organization"
+                  placeholder={
+                    language === "mn"
+                      ? "Жишээ: Салон, шүдний эмнэлэг"
+                      : "e.g. Salon, dental clinic"
+                  }
                   maxLength={150}
                 />
               </label>
@@ -209,9 +256,24 @@ export function Contact() {
               {t.contact}
               <input
                 name="contact"
-                autoComplete="email"
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
+                pattern="[0-9]{8}"
+                onInput={(event) => {
+                  event.currentTarget.value = event.currentTarget.value
+                    .replace(/[^0-9]/g, "")
+                    .slice(0, 8);
+                }}
+                placeholder="85563793"
+                title={
+                  language === "mn"
+                    ? "8 оронтой утасны дугаар оруулна уу. Жишээ: 85563793"
+                    : "Enter an 8-digit Mongolian phone number, e.g. 85563793"
+                }
                 required
-                maxLength={150}
+                minLength={8}
+                maxLength={8}
               />
             </label>
             <label htmlFor="inquiry-service">{t.need}</label>
@@ -253,8 +315,17 @@ export function Contact() {
             <p className="form-notice">
               {contactEmail ? t.sendingNote : t.fallback}
             </p>
-            <button className="button form-submit" type="submit">
-              {contactEmail ? t.send : t.download}
+            <button
+              className="button form-submit"
+              type="submit"
+              disabled={sending}
+              aria-busy={sending}
+            >
+              {sending
+                ? language === "mn"
+                  ? "Илгээж байна…"
+                  : "Sending…"
+                : t.send}
               <Arrow />
             </button>
             {contactEmail && (
@@ -269,7 +340,15 @@ export function Contact() {
                 {t.download} ↓
               </button>
             )}
-            <p role="status" className="form-status">
+            <p
+              role="status"
+              className={`form-status${sent ? " form-status-success" : ""}`}
+            >
+              {sent && (
+                <span aria-hidden="true" className="success-check">
+                  ✓
+                </span>
+              )}
               {status}
             </p>
             <p className="form-privacy">{t.privacy}</p>

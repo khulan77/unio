@@ -4377,3 +4377,26 @@ body:has(.contact-dialog[open]) {
     padding-inline: 16px;
   }
 }
+
+.form-status-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid #cbdcca;
+  border-radius: 12px;
+  background: #edf4e9;
+  color: #344d3f;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.success-check {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #344d3f;
+  color: white;
+}

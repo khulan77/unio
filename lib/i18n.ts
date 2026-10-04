@@ -104,24 +104,24 @@ export const copy = {
     formIntro:
       "Хэдэн мэдээллээ үлдээгээрэй. Эндээс таны төслийн эхний алхам эхэлнэ.",
     name: "Таны нэр",
-    company: "Бизнес / байгууллага",
+    company: "Бизнесийн төрөл",
     optional: "заавал биш",
-    contact: "Утас эсвэл имэйл",
+    contact: "Утасны дугаар",
     need: "Танд юу хэрэгтэй вэ?",
     unsure: "Хараахан шийдээгүй",
     message: "Төслийн тухай",
     messageHint: "Ямар асуудлыг шийдэхийг хүсэж байна вэ?",
-    send: "Имэйлээр хүсэлт илгээх",
+    send: "Хүсэлт илгээх",
     download: "Хүсэлтээ татах",
-    sendingNote:
-      "Таны имэйл программд хүсэлтийн ноорог нээгдэнэ. Та өөрөө илгээнэ.",
+    sendingNote: "Хүсэлтээ эндээс шууд манай багт илгээнэ.",
     fallback:
       "Шууд илгээх суваг одоогоор тохируулагдаагүй. Хүсэлтээ файл болгон хадгалж, Хулангийн портфолио дахь холбоо барих сувгаар илгээгээрэй.",
     downloaded:
       "Хүсэлт татагдлаа. UNIO руу илгээгдээгүй. Портфолио дахь холбоо барих сувгаар илгээнэ үү.",
     emailOpened:
       "Имэйл ноорог нээх хүсэлт өглөө. Имэйл программаасаа илгээхээ баталгаажуулаарай.",
-    privacy: "Энэ маягт мэдээллийг серверт хадгалахгүй.",
+    privacy:
+      "Таны мэдээллийг хүсэлтэд хариу өгөх зорилгоор имэйлээр дамжуулна.",
     ui: {
       overview: "Ерөнхий",
       bookings: "Цаг захиалга",
@@ -244,24 +244,24 @@ export const copy = {
     formTitle: "Let’s talk about your project.",
     formIntro: "A few details are all we need to start the conversation.",
     name: "Your name",
-    company: "Business / company",
+    company: "Business type",
     optional: "optional",
-    contact: "Phone or email",
+    contact: "Phone number",
     need: "What do you need?",
     unsure: "Not sure yet",
     message: "About your project",
     messageHint: "What problem would you like to solve?",
-    send: "Send inquiry by email",
+    send: "Send inquiry",
     download: "Download inquiry",
-    sendingNote:
-      "This opens a draft in your email app. You review and send it yourself.",
+    sendingNote: "Send your inquiry directly to our team.",
     fallback:
       "Direct delivery is not configured yet. Save your inquiry and send it through the contact channels on Khulan’s portfolio.",
     downloaded:
       "Inquiry downloaded. It has not been sent to UNIO. Please send it through the contact channels on the portfolio.",
     emailOpened:
       "An email draft was requested. Please confirm sending in your email app.",
-    privacy: "This form does not store your information on a server.",
+    privacy:
+      "Your details are sent by email so we can respond to your inquiry.",
     ui: {
       overview: "Overview",
       bookings: "Bookings",
