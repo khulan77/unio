@@ -7,12 +7,12 @@ export const copy = {
     menu: "Цэс нээх",
     close: "Хаах",
     studio: "UNIO — СОФТВЭР СТУДИ",
-    hero: ["Таны санааг", "вэбсайт, апп", "болгон бүтээнэ."],
+    hero: ["Бизнесийн ажлыг", "технологиор", "хөнгөвчилнө."],
     intro:
-      "Танилцуулгын сайт, онлайн дэлгүүрээс гар утасны апп, бизнесийн систем хүртэл. Манай баг таны хэрэгцээнд тохируулан дизайн, хөгжүүлэлт, нэвтрүүлэлтийг цогцоор нь хийнэ.",
+      "Вэбсайт, цаг захиалгын систем болон тусгай программ хангамжийг таны бизнесийн ажиллагаанд тохируулан бүтээнэ.",
     primary: "Төслөө эхлүүлэх",
-    view: "Бидний ажлууд",
-    pills: ["Вэбсайт", "Гар утасны апп", "Онлайн дэлгүүр", "Бизнесийн систем"],
+    view: "Ажлууд үзэх",
+    pills: ["Вэбсайт", "Цаг захиалга", "Тусгай программ"],
     location: "УЛААНБААТАР, МОНГОЛ",
     tagline: "Таны бизнес. Нэг систем.",
     trust: [
@@ -83,15 +83,15 @@ export const copy = {
       "Organic Care-ийн админ орчин — салбар, мастер болон өдрийн цаг захиалгын нэгдсэн хуваарь.",
     caseImageAlt:
       "Organic Care админ систем: гурван салбарын сонголт, мастеруудын өдрийн цаг захиалгын хуанли",
-    aboutLabel: "02 / МАНАЙ БАГ",
-    aboutTitle: "Таны санаа. Манай багийн шийдэл.",
-    teamIntro: "Бид бол UNIO баг хамт олон.",
+    aboutLabel: "02 / UNIO СТУДИ",
+    aboutTitle: "Бизнесийн асуудлыг программ хангамжаар шийднэ.",
+    teamIntro: "UNIO — үүсгэн байгуулагчийн удирддаг хөгжүүлэлтийн студи.",
     aboutText:
-      "Бид бизнесүүдэд вэбсайт, цаг захиалгын систем болон тусгай программ хангамжийг хамтран бүтээдэг баг. Дизайн, хөгжүүлэлт, туршилтыг нэг зорилгын дор нэгтгэж, бизнесийн бодит асуудлыг энгийн, цэгцтэй шийдлээр шийдэхийг зорьдог.",
+      "Вэбсайт, цаг захиалгын систем болон тусгай программ хангамжийг хэрэгцээнд тань тохируулан дизайн, хөгжүүлэлтээс нэвтрүүлэлт хүртэл бүтээнэ.",
     portfolio: "Хувийн портфолио үзэх",
     purpose: ["ЗОРИЛГОТОЙ", "ХӨГЖҮҮЛЭЛТ."],
     teamNote:
-      "Эхний уулзалтаас нэвтрүүлэлт хүртэл — манай баг тантай шууд хамтран ажиллана.",
+      "Эхний уулзалтаас нэвтрүүлэлт хүртэл хөгжүүлэгчтэйгээ шууд хамтран ажиллана.",
     processTitle: "Тодорхой үйл явц. Хамтын үр дүн.",
     processNames: ["Ойлгох", "Төлөвлөх", "Хөгжүүлэх", "Нэвтрүүлэх"],
     processTexts: [
@@ -118,7 +118,7 @@ export const copy = {
     messageHint: "Ямар асуудлыг шийдэхийг хүсэж байна вэ?",
     send: "Хүсэлт илгээх",
     download: "Хүсэлтээ татах",
-    sendingNote: "Хүсэлтээ эндээс шууд манай багт илгээнэ.",
+    sendingNote: "Хүсэлтээ эндээс шууд UNIO студид илгээнэ.",
     fallback:
       "Шууд илгээх суваг одоогоор тохируулагдаагүй. Хүсэлтээ файл болгон хадгалж, Хулангийн портфолио дахь холбоо барих сувгаар илгээгээрэй.",
     downloaded:
@@ -154,12 +154,12 @@ export const copy = {
     menu: "Open menu",
     close: "Close",
     studio: "UNIO — SOFTWARE STUDIO",
-    hero: ["Your idea.", "Websites & apps.", "Built together."],
+    hero: ["Make business", "simpler with", "technology."],
     intro:
-      "From brand websites and online stores to mobile apps and business software. Our team brings design, development and launch together around your needs.",
+      "Websites, booking systems and custom software built around the way your business works.",
     primary: "Start a project",
     view: "View our work",
-    pills: ["Websites", "Mobile apps", "Online stores", "Business software"],
+    pills: ["Websites", "Booking systems", "Custom software"],
     location: "ULAANBAATAR, MONGOLIA",
     tagline: "Your business. One system.",
     trust: ["Tailored design.", "Connected tools.", "Built end-to-end."],
@@ -225,15 +225,15 @@ export const copy = {
       "Organic Care’s admin workspace — branch selection, staff schedules and daily appointments in one view.",
     caseImageAlt:
       "Organic Care admin system with three branch options and daily appointments arranged by staff member",
-    aboutLabel: "02 / OUR TEAM",
-    aboutTitle: "Your vision. Our team’s craft.",
-    teamIntro: "We’re the team behind UNIO.",
+    aboutLabel: "02 / THE STUDIO",
+    aboutTitle: "Solving business problems with software.",
+    teamIntro: "UNIO is a founder-led development studio.",
     aboutText:
-      "We’re a team building websites, booking systems and custom software for businesses. We bring design, development and testing together to turn real business problems into clear, practical digital solutions.",
+      "Websites, booking systems and custom software tailored to your needs, from design and development through to launch.",
     portfolio: "View personal portfolio",
     purpose: ["SOFTWARE", "WITH PURPOSE."],
     teamNote:
-      "From the first conversation to launch — work directly with our team.",
+      "Work directly with the developer, from the first conversation to launch.",
     processTitle: "A clear process. A shared outcome.",
     processNames: ["Discover", "Design", "Build", "Launch"],
     processTexts: [
@@ -259,7 +259,7 @@ export const copy = {
     messageHint: "What problem would you like to solve?",
     send: "Send inquiry",
     download: "Download inquiry",
-    sendingNote: "Send your inquiry directly to our team.",
+    sendingNote: "Send your inquiry directly to UNIO.",
     fallback:
       "Direct delivery is not configured yet. Save your inquiry and send it through the contact channels on Khulan’s portfolio.",
     downloaded:

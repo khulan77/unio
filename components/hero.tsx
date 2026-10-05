@@ -10,12 +10,12 @@ export function SystemVisual() {
       role="img"
       aria-label={
         mn
-          ? "Бүх төрлийн вэбсайт, апп: танилцуулга, онлайн дэлгүүр, захиалга, сургалт болон бизнесийн системийн загвар дүрслэл"
-          : "Concept designs for a website, mobile app and admin system"
+          ? "Вэбсайт, цаг захиалга, бизнесийн удирдлагын системийн загвар дүрслэл"
+          : "Concept designs for a website, booking experience and admin system"
       }
     >
       <div className="product-composition-label">
-        {mn ? "ВЭБСАЙТ · АПП · СИСТЕМ" : "WEBSITES · APPS · SOFTWARE"}
+        {mn ? "WEBSITE · BOOKING · SYSTEM" : "WEBSITE · BOOKING · SYSTEM"}
       </div>
       <div className="product-web" aria-hidden="true">
         <div className="product-browser">
@@ -31,18 +31,20 @@ export function SystemVisual() {
               <>
                 Бүх төрлийн
                 <br />
-                вэбсайт, апп.
+                вэбсайт, систем.
               </>
             ) : (
               <>
                 Every kind of
                 <br />
-                website & app.
+                website & system.
               </>
             )}
           </h3>
           <p className="product-brand-promise">
-            {mn ? "Таны бизнесийн шийдэл. Таны орон зай." : "Your business solution. Your own space."}
+            {mn
+              ? "Таны бизнесийн шийдэл. Таны орон зай."
+              : "Your business solution. Your own space."}
           </p>
           <p>
             {mn
@@ -50,7 +52,9 @@ export function SystemVisual() {
               : "Brand sites · Stores · Booking · Learning"}
           </p>
           <div className="product-web-line">
-            <span>{mn ? "Таны хэрэгцээнд тохируулна" : "Built around your needs"}</span>
+            <span>
+              {mn ? "Таны хэрэгцээнд тохируулна" : "Built around your needs"}
+            </span>
             <Arrow />
           </div>
           <div className="product-swatches">
@@ -63,19 +67,19 @@ export function SystemVisual() {
       <div className="product-phone" aria-hidden="true">
         <div className="product-phone-camera" />
         <div className="product-phone-body">
-          <small>02 / {mn ? "АПП" : "APP"}</small>
+          <small>02 / {mn ? "ЦАГ ЗАХИАЛГА" : "BOOKING"}</small>
           <h3>
             {mn ? (
               <>
-                Таны бизнест
+                Цагаа
                 <br />
-                зориулсан шийдэл.
+                онлайнаар захиал.
               </>
             ) : (
               <>
-                A solution for
+                Book your
                 <br />
-                your business.
+                next visit.
               </>
             )}
           </h3>

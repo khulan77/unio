@@ -57,7 +57,8 @@ export const pricingCopy = {
         "Гар утас, таблет, компьютерт тохирсон загвар",
         "Бизнесийн танилцуулга",
         "Үйлчилгээ / бүтээгдэхүүний мэдээлэл",
-        "Холбоо барих мэдээлэл, газрын зураг",
+        "Холбоо барих мэдээлэл",
+        "Газрын зураг",
         "Сайтыг байршуулж нэвтрүүлэх",
       ],
       [
@@ -170,7 +171,8 @@ export const pricingCopy = {
         "Mobile, tablet and desktop layouts",
         "Business information",
         "Service / product information",
-        "Contact details and map",
+        "Contact details",
+        "Location map",
         "Deployment and launch",
       ],
       [

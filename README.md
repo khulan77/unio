@@ -72,3 +72,9 @@ Contact phone: 85563793 (click to call). Instagram (`dev_code77`) and Facebook (
 The form now POSTs to `/api/inquiry` instead of opening a mail application. Configure `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified Resend sender), and `CONTACT_TO_EMAIL` in `.env.local` and in deployment environment variables, then restart/redeploy. The recipient defaults to devcode549@gmail.com. Never expose the API key with a NEXT_PUBLIC_ prefix. Setup: https://resend.com/docs/send-with-nextjs
 
 Missing credentials return an error, not success. Provider acceptance shows a success message; inbox delivery still depends on the email provider. Validation and provider success/failure were tested with mocked delivery; actual delivery requires configured credentials. Add platform-level rate limiting before exposing the public endpoint to high traffic; its honeypot and origin check do not constitute a distributed rate limiter.
+
+### Studio positioning and brand email
+
+UNIO is presented as a founder-led development studio focused on websites, booking systems and custom software. Organic Care is the featured business-system case study. Pricing includes six scope items per full package and three highlights per homepage card.
+
+After buying a domain and creating a working inbox, update NEXT_PUBLIC_CONTACT_EMAIL to the actual studio address (for example hello@your-domain). Update CONTACT_TO_EMAIL if inquiry delivery should also move, and configure CONTACT_FROM_EMAIL with the verified sending domain. Keep the existing Gmail recipient until the mailbox is working; do not publish an unconfigured address.

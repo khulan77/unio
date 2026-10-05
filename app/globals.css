@@ -5232,3 +5232,28 @@ body:has(.contact-dialog[open]) {
 @media (max-width: 767px) {
   .hero-main > .product-composition { margin-top: 20px; }
 }
+
+.business-proof { margin-top: 56px; padding: clamp(24px, 4vw, 48px); border-radius: 24px; background: #293e31; color: #fff; }
+.business-proof-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; margin-bottom: 32px; }
+.business-proof .eyebrow { color: #c6d6bc; margin-bottom: 24px; }
+.business-proof-brand { font-size: 12px; letter-spacing: 2px; color: #c6d6bc; }
+.business-proof h3 { font-size: clamp(28px, 3.5vw, 44px); line-height: 1.25; margin: 14px 0 18px; font-weight: 700; }
+.business-proof-heading p:not(.eyebrow) { font-size: 15px; line-height: 1.85; color: #d9e2d4; }
+.business-proof-facts { display: grid; gap: 24px; border-left: 1px solid #63765e; padding-left: 32px; }
+.business-proof-facts strong { display: block; font-size: 34px; font-weight: 700; }
+.business-proof-facts span { display: block; margin-top: 8px; font-size: 10px; letter-spacing: 1px; color: #c6d6bc; }
+.business-proof figure { margin: 0; }
+.business-proof figure img { display: block; width: 100%; height: auto; border-radius: 12px; }
+.business-proof figcaption { font-size: 12px; color: #c6d6bc; margin-top: 12px; }
+.business-proof-footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+.business-proof .case-tags { margin: 0; }
+.business-proof .case-tags span { color: #e5ecdf; border-color: #63765e; background: transparent; }
+.business-proof .text-link { color: #fff; }
+.team-panel h2 { max-width: 20ch; font-size: clamp(27px, 2.8vw, 37px); }
+@media (max-width: 767px) {
+  .business-proof { margin-top: 32px; padding: 24px 20px; border-radius: 18px; }
+  .business-proof-heading { grid-template-columns: 1fr; gap: 24px; }
+  .business-proof-facts { grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 0 0; border-left: 0; border-top: 1px solid #63765e; }
+  .business-proof-facts strong { font-size: 27px; }
+  .business-proof-facts span { line-height: 1.7; font-size: 9px; }
+}
