@@ -2,6 +2,7 @@
 import { ServiceScope } from "./service-scope";
 import { useState } from "react";
 import {
+  formatPrice,
   plans,
   planGuide,
   pricingCopy,
@@ -9,12 +10,14 @@ import {
   type PricingInquiry,
 } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
+import { OriginalPrice, SaleBadge, SaleBanner, useSaleActive } from "./sale";
 import { Arrow, Icon, SectionHeading } from "./ui";
 export function Pricing() {
   const { language } = useLanguage();
   const p = pricingCopy[language];
   const guide = planGuide[language];
   const [payment, setPayment] = useState<PaymentPreference>("project");
+  const showSale = useSaleActive() && payment !== "subscription";
   const choose = (plan: PricingInquiry["plan"]) =>
     window.dispatchEvent(
       new CustomEvent<PricingInquiry>("unio-inquiry", {
@@ -63,6 +66,7 @@ export function Pricing() {
             ? p.monthlyNote
             : p.priceNote}
       </p>
+      <SaleBanner />
       <div className="pricing-grid">
         {plans.map((plan, index) => (
           <article
@@ -74,6 +78,7 @@ export function Pricing() {
             <h3>{p.names[index]}</h3>
             <p className="price-description">{guide.audience[index]}</p>
             <div className="price-amount">
+              {showSale && <SaleBadge />}
               <span>
                 {payment === "subscription"
                   ? p.subscription
@@ -86,10 +91,15 @@ export function Pricing() {
                   {p.subscriptionPrice}
                 </strong>
               ) : (
-                <strong>
-                  {new Intl.NumberFormat("en-US").format(plan.price)}₮
-                  <small>{p.suffix}</small>
-                </strong>
+                <>
+                  {showSale && <OriginalPrice value={plan.originalPrice} />}
+                  <strong>
+                    {formatPrice(
+                      showSale ? plan.salePrice : plan.originalPrice,
+                    )}
+                    <small>{p.suffix}</small>
+                  </strong>
+                </>
               )}
               {payment === "monthly" && <p>{p.monthlyQuote}</p>}
             </div>

@@ -1,10 +1,38 @@
+// Flip SALE_ACTIVE to false to end the launch sale everywhere.
+export const SALE_ACTIVE = true;
+// The sale runs through the end of this day (Ulaanbaatar time).
+export const SALE_END_DATE = "2026-12-31";
+const saleEndsAt = new Date(`${SALE_END_DATE}T23:59:59+08:00`).getTime();
+export const isSaleActive = (now = Date.now()) =>
+  SALE_ACTIVE && now <= saleEndsAt;
+
 export const plans = [
-  { id: "website", price: 690000, serviceIndex: 0 },
-  { id: "business-website", price: 1290000, serviceIndex: 0 },
-  { id: "booking", price: 1990000, serviceIndex: 1 },
-  { id: "custom", price: 2990000, serviceIndex: 2 },
+  { id: "website", originalPrice: 690000, salePrice: 349000, serviceIndex: 0 },
+  {
+    id: "business-website",
+    originalPrice: 1290000,
+    salePrice: 649000,
+    serviceIndex: 0,
+  },
+  { id: "booking", originalPrice: 1990000, salePrice: 990000, serviceIndex: 1 },
+  { id: "custom", originalPrice: 2990000, salePrice: 1490000, serviceIndex: 2 },
 ] as const;
-export type PlanId = (typeof plans)[number]["id"];
+export type Plan = (typeof plans)[number];
+export type PlanId = Plan["id"];
+export const formatPrice = (value: number) =>
+  `${new Intl.NumberFormat("en-US").format(value)}₮`;
+export const saleCopy = {
+  mn: {
+    badge: "−50%",
+    banner: "Нээлтийн хямдрал — бүх багц 50% хямд. 12-р сарын 31 хүртэл.",
+    was: "Хуучин үнэ",
+  },
+  en: {
+    badge: "−50%",
+    banner: "Launch sale — 50% off every package. Until December 31.",
+    was: "Original price",
+  },
+};
 export type PaymentPreference = "project" | "monthly" | "subscription";
 export type PricingInquiry = {
   plan: PlanId;

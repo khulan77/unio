@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
-import { plans, pricingCopy, planGuide } from "@/lib/pricing";
+import { formatPrice, plans, pricingCopy, planGuide } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
+import { OriginalPrice, SaleBadge, SaleBanner, useSaleActive } from "./sale";
 import { Arrow } from "./ui";
 export function PricingSummary() {
   const { language } = useLanguage();
+  const saleActive = useSaleActive();
   const p = pricingCopy[language];
   const guide = planGuide[language];
   return (
@@ -25,6 +27,7 @@ export function PricingSummary() {
           <Arrow />
         </Link>
       </div>
+      <SaleBanner />
       <div className="pricing-summary-grid">
         {plans.map((plan, i) => (
           <Link
@@ -36,8 +39,12 @@ export function PricingSummary() {
             <h3>{p.names[i]}</h3>
             <p className="summary-audience">{guide.audience[i]}</p>
             <div className="summary-price-block">
+              {saleActive && <SaleBadge />}
               <span>{p.from}</span>
-              <strong>{plan.price.toLocaleString("en-US")}₮</strong>
+              {saleActive && <OriginalPrice value={plan.originalPrice} />}
+              <strong>
+                {formatPrice(saleActive ? plan.salePrice : plan.originalPrice)}
+              </strong>
             </div>
             <ul className="summary-features">
               {p.features[i].slice(0, 3).map((feature) => (

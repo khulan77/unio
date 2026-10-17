@@ -5257,3 +5257,44 @@ body:has(.contact-dialog[open]) {
   .business-proof-facts strong { font-size: 27px; }
   .business-proof-facts span { line-height: 1.7; font-size: 9px; }
 }
+
+/* Launch sale: banner, −50% pill and struck-through original price. */
+.sale-banner {
+  margin: 0 0 16px;
+  padding: 11px 16px;
+  border: 1px solid #ead3c4;
+  border-left: 3px solid #a65a3a;
+  border-radius: 10px;
+  background: #faf1eb;
+  color: #7e3f24;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.price-amount > .sale-badge,
+.pricing-summary-grid .summary-price-block > .sale-badge {
+  display: block;
+  width: fit-content;
+  margin: 0 0 10px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: #f6e6dc;
+  color: #8f4527;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .3px;
+}
+.price-was {
+  display: block;
+  margin-top: 6px;
+  color: #7c8577;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.price-amount .price-was + strong { margin-top: 2px; }
+@media (max-width: 600px) {
+  .sale-banner { font-size: 12px; padding: 10px 14px; }
+}
