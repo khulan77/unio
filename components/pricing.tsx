@@ -10,6 +10,7 @@ import {
   type PricingInquiry,
 } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
+import { PlanHelper } from "./plan-helper";
 import { OriginalPrice, SaleBadge, SaleBanner, useSaleActive } from "./sale";
 import { Arrow, Icon, SectionHeading } from "./ui";
 export function Pricing() {
@@ -70,13 +71,22 @@ export function Pricing() {
       <div className="pricing-grid">
         {plans.map((plan, index) => (
           <article
-            className={`price-card plan-tone-${index}`}
+            className={`price-card plan-tone-${index}${"featured" in plan ? " is-featured" : ""}`}
             id={`plan-${plan.id}`}
             key={plan.id}
           >
-            <span className="price-index">{guide.labels[index]}</span>
+            <div className="plan-pills">
+              <span className="price-index">{guide.labels[index]}</span>
+              {p.highlights[index] && (
+                <span className="plan-highlight">{p.highlights[index]}</span>
+              )}
+            </div>
             <h3>{p.names[index]}</h3>
-            <p className="price-description">{guide.audience[index]}</p>
+            <div className="plan-fit">
+              <p className="plan-fit-label">{p.fitLabel}</p>
+              <p>{p.fit[index]}</p>
+              <p className="plan-fit-example">{p.examples[index]}</p>
+            </div>
             <div className="price-amount">
               {showSale && <SaleBadge />}
               <span>
@@ -103,25 +113,36 @@ export function Pricing() {
               )}
               {payment === "monthly" && <p>{p.monthlyQuote}</p>}
             </div>
-            <p className="price-included">{p.included}</p>
-            <ul>
-              {p.features[index].map((feature) => (
-                <li key={feature}>
-                  <Icon name="check" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            {payment === "subscription" && (
-              <ul className="subscription-features">
-                {p.subscriptionFeatures.map((feature) => (
+            <p className="price-included plan-ladder">{p.ladder[index]}</p>
+            <div className="price-features">
+              <ul>
+                {p.features[index].map((feature) => (
                   <li key={feature}>
                     <Icon name="check" />
                     {feature}
                   </li>
                 ))}
               </ul>
-            )}
+              {payment === "subscription" && (
+                <ul className="subscription-features">
+                  {p.subscriptionFeatures.map((feature) => (
+                    <li key={feature}>
+                      <Icon name="check" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <a
+              className="plan-example"
+              href={plan.example.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${p.seeExample}: ${plan.example.name}`}
+            >
+              {p.seeExample} <span aria-hidden="true">→</span>
+            </a>
             <button
               type="button"
               className="button price-cta"
@@ -133,6 +154,7 @@ export function Pricing() {
           </article>
         ))}
       </div>
+      <PlanHelper idPrefix="plan-" />
       <p className="pricing-footnote">
         {payment === "subscription" ? p.subscriptionNote : p.priceNote}
       </p>

@@ -1,20 +1,56 @@
 "use client";
 import { useSyncExternalStore } from "react";
-import { SALE_ACTIVE, formatPrice, isSaleActive, saleCopy } from "@/lib/pricing";
+import {
+  SALE_ACTIVE,
+  formatPrice,
+  isSaleActive,
+  saleCopy,
+  saleEndsAt,
+} from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
 
-const subscribe = () => () => {};
+// One shared one-second clock; snapshots are whole seconds so they stay stable.
+const subscribeClock = (onTick: () => void) => {
+  const timer = window.setInterval(onTick, 1000);
+  return () => window.clearInterval(timer);
+};
+const nowInSeconds = () => Math.floor(Date.now() / 1000);
+const useNowSeconds = () =>
+  useSyncExternalStore<number | null>(subscribeClock, nowInSeconds, () => null);
+
 // The server snapshot ignores the end date so static HTML and hydration agree;
-// the client then checks the date and hides the sale once it has ended.
+// the client then checks the live clock and hides the sale once it has ended.
 export function useSaleActive() {
-  return useSyncExternalStore(subscribe, () => isSaleActive(), () => SALE_ACTIVE);
+  const now = useNowSeconds();
+  return now === null ? SALE_ACTIVE : isSaleActive(now * 1000);
 }
+
+const pad = (value: number) => String(value).padStart(2, "0");
 
 export function SaleBanner() {
   const { language } = useLanguage();
+  const now = useNowSeconds();
   const saleActive = useSaleActive();
   if (!saleActive) return null;
-  return <p className="sale-banner">{saleCopy[language].banner}</p>;
+  const copy = saleCopy[language];
+  const remaining =
+    now === null ? null : Math.max(0, Math.floor(saleEndsAt / 1000) - now);
+  return (
+    <div className="sale-banner">
+      <p>{copy.banner}</p>
+      {remaining !== null && (
+        <p className="sale-countdown" role="timer">
+          {copy.endsIn}{" "}
+          <strong>
+            {Math.floor(remaining / 86400)} {copy.days}{" "}
+            {pad(Math.floor((remaining % 86400) / 3600))}:
+            {pad(Math.floor((remaining % 3600) / 60))}:{pad(remaining % 60)}
+          </strong>
+          {copy.left && ` ${copy.left}`}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export function SaleBadge() {

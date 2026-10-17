@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { formatPrice, plans, pricingCopy, planGuide } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
+import { PlanHelper } from "./plan-helper";
 import { OriginalPrice, SaleBadge, SaleBanner, useSaleActive } from "./sale";
 import { Arrow } from "./ui";
 export function PricingSummary() {
@@ -30,14 +31,23 @@ export function PricingSummary() {
       <SaleBanner />
       <div className="pricing-summary-grid">
         {plans.map((plan, i) => (
-          <Link
-            href={`/pricing#plan-${plan.id}`}
+          <article
+            id={`summary-plan-${plan.id}`}
             key={plan.id}
-            className={`summary-plan summary-plan-${i}`}
+            className={`summary-plan summary-plan-${i}${"featured" in plan ? " is-featured" : ""}`}
           >
-            <span className="summary-plan-number">{guide.labels[i]}</span>
+            <div className="plan-pills">
+              <span className="summary-plan-number">{guide.labels[i]}</span>
+              {p.highlights[i] && (
+                <span className="plan-highlight">{p.highlights[i]}</span>
+              )}
+            </div>
             <h3>{p.names[i]}</h3>
-            <p className="summary-audience">{guide.audience[i]}</p>
+            <div className="plan-fit">
+              <p className="plan-fit-label">{p.fitLabel}</p>
+              <p>{p.fit[i]}</p>
+              <p className="plan-fit-example">{p.examples[i]}</p>
+            </div>
             <div className="summary-price-block">
               {saleActive && <SaleBadge />}
               <span>{p.from}</span>
@@ -46,18 +56,29 @@ export function PricingSummary() {
                 {formatPrice(saleActive ? plan.salePrice : plan.originalPrice)}
               </strong>
             </div>
+            <p className="plan-ladder">{p.ladder[i]}</p>
             <ul className="summary-features">
-              {p.features[i].slice(0, 3).map((feature) => (
+              {p.features[i].map((feature) => (
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
-            <span className="summary-details">
+            <a
+              className="plan-example"
+              href={plan.example.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${p.seeExample}: ${plan.example.name}`}
+            >
+              {p.seeExample} <span aria-hidden="true">→</span>
+            </a>
+            <Link href={`/pricing#plan-${plan.id}`} className="summary-details">
               {guide.details}
               <Arrow diagonal />
-            </span>
-          </Link>
+            </Link>
+          </article>
         ))}
       </div>
+      <PlanHelper idPrefix="summary-plan-" />
       <p className="pricing-summary-note">
         {language === "mn"
           ? "Хэсэгчлэн төлөх болон сарын үйлчилгээний сонголттой. Админ, хэрэглэгчийн боломжууд, нэмэлт хөгжүүлэлтийн үнийг дэлгэрэнгүй хуудаснаас үзээрэй."
