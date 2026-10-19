@@ -60,7 +60,7 @@ export function LanguageProvider({
           ? "UNIO — Үнэ, багц ба нэмэлт хөгжүүлэлт"
           : "UNIO — Pricing & Development Packages"
         : language === "mn"
-          ? "UNIO — Website, Booking System & Business Software"
+          ? "UNIO — Вэбсайт, цаг захиалга, бизнесийн систем"
           : "UNIO — Websites & Business Software";
     const description = document.querySelector('meta[name="description"]');
     description?.setAttribute(

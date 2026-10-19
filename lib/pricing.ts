@@ -24,16 +24,16 @@ export const formatPrice = (value: number) =>
   `${new Intl.NumberFormat("en-US").format(value)}₮`;
 export const saleCopy = {
   mn: {
-    badge: "−50%",
-    banner: "Нээлтийн хямдрал — бүх багц 50% хямд. 11-р сарын 1 хүртэл.",
+    badge: "Нээлтийн үнэ",
+    banner: "Нээлтийн тусгай үнэ — бүх багцад. 11-р сарын 1 хүртэл.",
     endsIn: "Хямдрал дуусахад",
     days: "хоног",
     left: "үлдлээ",
     was: "Хуучин үнэ",
   },
   en: {
-    badge: "−50%",
-    banner: "Launch sale — 50% off every package. Until November 1.",
+    badge: "Launch price",
+    banner: "Special launch pricing on all packages. Until November 1.",
     endsIn: "Sale ends in",
     days: "days",
     left: "",
@@ -57,10 +57,10 @@ export const pricingCopy = {
     subscription: "Сарын үйлчилгээ",
     subscriptionPrice: "Үнийн санал авна",
     subscriptionNote:
-      "Хөгжүүлэлт, хостинг, тогтмол арчилгааг сарын үйлчилгээгээр авна. Сарын үнэ, хөгжүүлэлтийн ажлын хэмжээ, хостингийн хүчин чадал, арчилгааны хүрээ болон үйлчилгээний хугацааг тусгай саналд тодорхойлно.",
+      "Хөгжүүлэлт, тогтмол арчилгааг сарын үйлчилгээгээр авна. Хостингийн төлбөрийг захиалагч тусад нь төлнө. Сарын үнэ, хөгжүүлэлтийн ажлын хэмжээ, хостингийн хүчин чадал, арчилгааны хүрээ болон үйлчилгээний хугацааг тусгай саналд тодорхойлно.",
     subscriptionFeatures: [
       "Тохиролцсон хүрээний хөгжүүлэлт",
-      "Тохирсон хүчин чадлын хостинг",
+      "Хостингийн тохиргоо, зардлыг тусад нь тохирно",
       "Тогтмол арчилгаа, техникийн дэмжлэг",
     ],
     subscriptionScope:
@@ -170,7 +170,7 @@ export const pricingCopy = {
     faq: [
       [
         "Хэсэгчлэн төлөх, сарын үйлчилгээ хоёр юугаараа ялгаатай вэ?",
-        "Хэсэгчлэн төлөх нь нэг төслийн нийт үнийг тохирсон хуваариар төлөх хэлбэр. Сарын үйлчилгээ нь хөгжүүлэлт, хостинг, тогтмол арчилгааг тохирсон хүрээнд үргэлжлүүлэн авах үйлчилгээ юм.",
+        "Хэсэгчлэн төлөх нь нэг төслийн нийт үнийг тохирсон хуваариар төлөх хэлбэр. Сарын үйлчилгээ нь хөгжүүлэлт, тогтмол арчилгааг тохирсон хүрээнд үргэлжлүүлэн авах үйлчилгээ юм.",
       ],
       [
         "Эхлэх үнэд бүх боломж багтах уу?",
@@ -186,7 +186,7 @@ export const pricingCopy = {
       ],
       [
         "Дараа нь өөрчлөлт, арчилгаа хийлгэж болох уу?",
-        "Шинэ боломж, агуулгын өөрчлөлт болон тогтмол арчилгааг тусад нь ярилцаж болно. Хамрах ажил, хугацаа, үнийг эхлэхээс өмнө тохиролцоно.",
+        "Хүлээлгэн өгснөөс хойш 30 хоног алдаа болон жижиг засварыг үнэгүй хийнэ. Нэмэлт хөгжүүлэлт, шинэ боломж болон 30 хоногийн дараах засвар тусдаа төлбөртэй. Ажил эхлэхээс өмнө хүрээ, хугацаа, үнийг тохирно.",
       ],
     ],
     inquiryLabel: "Сонгосон багц",
@@ -203,10 +203,10 @@ export const pricingCopy = {
     subscription: "Monthly service",
     subscriptionPrice: "Request a quote",
     subscriptionNote:
-      "Get development, hosting and ongoing maintenance as a monthly service. Your proposal defines the monthly fee, development capacity, hosting resources, maintenance scope and service term.",
+      "Get development and ongoing maintenance as a monthly service. Hosting is paid separately by the client. Your proposal defines the monthly fee, development capacity, hosting resources, maintenance scope and service term.",
     subscriptionFeatures: [
       "Development within the agreed scope",
-      "Hosting with agreed resources",
+      "Hosting setup and costs agreed separately",
       "Ongoing maintenance and technical support",
     ],
     subscriptionScope:
@@ -311,7 +311,7 @@ export const pricingCopy = {
     faq: [
       [
         "How do installments differ from a monthly service?",
-        "Installments spread a single project’s total price over an agreed schedule. A monthly service provides development, hosting and ongoing maintenance within an agreed scope.",
+        "Installments spread a single project’s total price over an agreed schedule. A monthly service provides development and ongoing maintenance within an agreed scope; hosting is paid separately by the client.",
       ],
       [
         "Does the starting price cover every feature?",
@@ -327,7 +327,7 @@ export const pricingCopy = {
       ],
       [
         "Can I request updates and maintenance later?",
-        "New features, content updates and ongoing maintenance can be discussed separately. Scope, timing and pricing are agreed before that work begins.",
+        "Bug fixes and minor adjustments are free for 30 days after handover. Additional development, new features and fixes after that period are charged separately, with scope, timing and price agreed before work begins.",
       ],
     ],
     inquiryLabel: "Selected package",
@@ -347,7 +347,7 @@ export const planGuide = {
     payments: [
       "Тохирсон ажлын хүрээнд нийт үнийг гаргана.",
       "Төслийн нийт төлбөрийг тохирсон хугацаанд хуваана.",
-      "Хөгжүүлэлт, хостинг, арчилгааг сарын үйлчилгээгээр авна.",
+      "Хөгжүүлэлт, арчилгааг сарын үйлчилгээгээр авна. Хостинг тусдаа төлбөртэй.",
     ],
     details: "Багцад юу багтах вэ?",
     paymentTitle: "Төлбөрөө хэрхэн хийх вэ?",
@@ -362,7 +362,7 @@ export const planGuide = {
     payments: [
       "A total quote based on an agreed project scope.",
       "Split the project total over an agreed schedule.",
-      "Development, hosting and maintenance as a monthly service.",
+      "Development and maintenance as a monthly service. Hosting is billed separately.",
     ],
     details: "Explore what's included",
     paymentTitle: "How would you like to pay?",

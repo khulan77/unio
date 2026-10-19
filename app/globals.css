@@ -5518,24 +5518,38 @@ body:has(.contact-dialog[open]) {
   .salon-project-link { font-size: 13px; }
 }
 
-/* Make the deliverable and handover scope clear before comparing prices. */
-.pricing-deliverables { margin: 32px 0 28px; padding: 32px; background: #e9eee5; border: 1px solid #c5d3bf; border-radius: 18px; }
-.deliverables-heading > p { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #52674f; }
-.deliverables-heading h3 { margin: 0; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.25; letter-spacing: -.035em; color: #253c2f; }
-.deliverables-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 28px; }
-.deliverables-grid > div { border-top: 1px solid #c4d0bf; padding-top: 22px; }
-.deliverables-grid svg { color: #385540; margin-bottom: 12px; }
-.deliverables-grid h4 { margin: 0 0 10px; font-size: 18px; line-height: 1.4; color: #253c2f; }
-.deliverables-grid p { margin: 0; font-size: 14px; line-height: 1.8; color: #4c5c48; }
-.pricing-deliverables .deliverables-note { border-top: 1px solid #c4d0bf; padding-top: 18px; margin: 24px 0 0; font-size: 12px; line-height: 1.8; color: #586650; }
-.plan-outcome { background: #e8eee2; border-left: 3px solid #57704f; border-radius: 0 8px 8px 0; padding: 14px 14px 16px; margin: 4px 0 18px; }
-.plan-outcome > span { display: block; font-size: 11px; font-weight: 700; color: #52674f; margin-bottom: 7px; }
-.plan-outcome > strong { display: block; font-size: 17px; line-height: 1.5; letter-spacing: -.025em; color: #253c2f; }
-.summary-plan.is-featured .plan-outcome, .price-card.is-featured .plan-outcome { background: #344d3f; border-color: #a8bc99; }
-.summary-plan.is-featured .plan-outcome > span, .price-card.is-featured .plan-outcome > span { color: #d5e3cd; }
-.summary-plan.is-featured .plan-outcome > strong, .price-card.is-featured .plan-outcome > strong { color: #fff; }
+/* Calm, consistent pricing and handover hierarchy. */
+.pricing-deliverables { margin: 56px 0 32px; padding: 36px 0; border-block: 1px solid #dce2d8; }
+.deliverables-heading > p { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #64705f; }
+.deliverables-heading h3 { margin: 0; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.3; letter-spacing: -.035em; color: #253c2f; }
+.deliverables-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; margin-top: 32px; }
+.deliverables-grid svg { color: #59705d; margin-bottom: 16px; width: 22px; height: 22px; }
+.deliverables-grid h4 { margin: 0 0 10px; font-size: 16px; line-height: 1.5; color: #253c2f; }
+.deliverables-grid p { margin: 0; font-size: 14px; line-height: 1.8; color: #5d6758; }
+.deliverables-terms { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding: 22px 24px; margin-top: 28px; border-radius: 10px; background: #eef1ea; }
+.deliverables-terms p { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: 13px; line-height: 1.8; color: #5d6758; }
+.deliverables-terms strong { color: #344d3f; }
+.plan-outcome { padding: 0; margin: 2px 0 14px; }
+.plan-outcome > span { display: block; font-size: 11px; color: #65715e; margin-bottom: 7px; }
+.plan-outcome > strong { display: block; font-size: 16px; font-weight: 500; line-height: 1.7; color: #3e4c39; }
+.pricing-summary-grid > .summary-plan, .pricing-grid > .price-card { border: 1px solid #d9e0d4; border-radius: 14px; background: #fff; box-shadow: none; transform: none; }
+.pricing-summary-grid > .summary-plan:hover, .pricing-grid > .price-card:hover { transform: none; background: #fff; box-shadow: 0 8px 24px #253c2f08; border-color: #a7b79e; }
+.pricing-summary-grid > .summary-plan.is-featured, .pricing-grid > .price-card.is-featured { border: 1px solid #758c6b; background: #f5f8f1; transform: none; box-shadow: none; }
+.pricing-summary-grid .plan-pills .summary-plan-number, .pricing-grid .plan-pills .price-index { padding: 0; background: transparent; color: #64705f; font-size: 11px; }
+.price-card.is-featured .plan-highlight, .summary-plan.is-featured .plan-highlight { box-shadow: none; border-radius: 4px; font-size: 10px; padding: 4px 7px; }
+.pricing-summary-grid .summary-price-block { border-top: 0; padding: 8px 0 24px; }
+.pricing-summary-grid .summary-price-block > strong { font-size: clamp(28px, 2.5vw, 36px); }
+.pricing-summary-grid .summary-features li { color: #4d5a46; line-height: 1.8; }
+.pricing-summary-grid .summary-details { background: transparent; border-color: #d2dccb; border-radius: 7px; }
+.pricing-summary-grid .is-featured .summary-details { background: #344d3f; color: white; border-color: #344d3f; }
+.pricing-summary .sale-banner, .pricing-section .sale-banner { background: #eef2e9; border: 1px solid #dbe3d4; border-left-width: 1px; color: #48603f; border-radius: 8px; }
+@media (max-width: 1000px) { .deliverables-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
 @media (max-width: 680px) {
-  .pricing-deliverables { padding: 24px 20px; }
-  .deliverables-grid { grid-template-columns: 1fr; gap: 22px; }
-  .deliverables-grid h4 { font-size: 18px; }
+  .pricing-deliverables { margin-top: 36px; padding: 28px 0; }
+  .deliverables-grid { grid-template-columns: 1fr; gap: 24px; }
+  .deliverables-grid > div { display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; }
+  .deliverables-grid svg { grid-row: span 2; margin-top: 2px; }
+  .deliverables-grid h4 { margin-bottom: 5px; }
+  .deliverables-grid p { grid-column: 2; }
+  .deliverables-terms { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
 }

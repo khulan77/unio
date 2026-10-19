@@ -8,13 +8,7 @@ export const metadata: Metadata = {
   title: "UNIO — Үнэ, багц ба нэмэлт хөгжүүлэлт",
   description:
     "Вэбсайт, системийн багц, төлбөрийн сонголт болон нэмэлт хөгжүүлэлт.",
-  alternates: {
-    canonical:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.VERCEL_PROJECT_PRODUCTION_URL
-        ? "/pricing"
-        : null,
-  },
+  alternates: { canonical: "/pricing" },
 };
 export default function PricingPage() {
   return (

@@ -69,7 +69,6 @@ export function Pricing() {
             ? p.monthlyNote
             : p.priceNote}
       </p>
-      <PricingDeliverables />
       <SaleBanner />
       <div className="pricing-grid">
         {plans.map((plan, index) => (
@@ -158,6 +157,7 @@ export function Pricing() {
           </article>
         ))}
       </div>
+      <PricingDeliverables />
       <PlanHelper idPrefix="plan-" />
       <p className="pricing-footnote">
         {payment === "subscription" ? p.subscriptionNote : p.priceNote}

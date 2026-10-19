@@ -5,7 +5,7 @@ import Link from "next/link";
 import { formatPrice, plans, pricingCopy, planGuide } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
 import { PlanHelper } from "./plan-helper";
-import { OriginalPrice, SaleBadge, SaleBanner, useSaleActive } from "./sale";
+import { OriginalPrice, SaleBanner, useSaleActive } from "./sale";
 import { Arrow } from "./ui";
 export function PricingSummary() {
   const { language } = useLanguage();
@@ -30,7 +30,6 @@ export function PricingSummary() {
           <Arrow />
         </Link>
       </div>
-      <PricingDeliverables />
       <SaleBanner />
       <div className="pricing-summary-grid">
         {plans.map((plan, i) => (
@@ -48,12 +47,9 @@ export function PricingSummary() {
             <h3>{p.names[i]}</h3>
             <div className="plan-fit">
               <div className="plan-outcome"><span>{planOutcomes[language].label}</span><strong>{planOutcomes[language].items[i]}</strong></div>
-              <p className="plan-fit-label">{p.fitLabel}</p>
-              <p>{p.fit[i]}</p>
               <p className="plan-fit-example">{p.examples[i]}</p>
             </div>
             <div className="summary-price-block">
-              {saleActive && <SaleBadge />}
               <span>{p.from}</span>
               {saleActive && <OriginalPrice value={plan.originalPrice} />}
               <strong>
@@ -62,7 +58,7 @@ export function PricingSummary() {
             </div>
             <p className="plan-ladder">{p.ladder[i]}</p>
             <ul className="summary-features">
-              {p.features[i].map((feature) => (
+              {p.features[i].slice(0, 4).map((feature) => (
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
@@ -82,6 +78,7 @@ export function PricingSummary() {
           </article>
         ))}
       </div>
+      <PricingDeliverables />
       <PlanHelper idPrefix="summary-plan-" />
       <p className="pricing-summary-note">
         {language === "mn"

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PricingDeliverables } from "./pricing-deliverables";
 import { useRef, useState, type FormEvent } from "react";
 import { plans, formatPrice, pricingCopy, SALE_END_DATE } from "@/lib/pricing";
 import { projects } from "@/lib/projects";
@@ -103,8 +104,10 @@ export function SalonLanding() {
 
       <section id="salon-price" className="container salon-price-section">
         <div className="salon-price-intro"><p className="eyebrow">03 / {text("ҮНЭ, АЖЛЫН ХҮРЭЭ", "PRICE & SCOPE")}</p><h2>{text("Танай салонд", "Made for")}<br />{text("тохируулж эхэлье.", "your salon.")}</h2><p>{text("Эхлээд салбар, мастер, үйлчилгээ болон одоогийн захиалгын арга барилыг ярилцана. Дараа нь яг багтах ажил, хугацаа, эцсийн үнийг тохирно.", "We start with your branches, specialists, services and current booking process. Then we agree on scope, timing and the final price.")}</p><Link className="text-link" href="/pricing">{text("Бүх багцыг харьцуулах", "Compare all packages")}<Arrow /></Link></div>
-        <div className="salon-price-card"><p className="eyebrow">{text("ЦАГ ЗАХИАЛГЫН СИСТЕМ", "BOOKING SYSTEM")}</p>{sale && <p className="salon-offer">{text("Нээлтийн үнэ", "Launch price")} · {SALE_END_DATE} {text("хүртэл", "inclusive")}</p>}<div className="salon-price">{sale && <s>{formatPrice(plan.originalPrice)}</s>}<strong>{formatPrice(sale ? plan.salePrice : plan.originalPrice)}</strong><span>{text("-өөс / төслийн эхлэх үнэ", "starting project price")}</span></div><ul>{pricingCopy[language].features[2].slice(0, 6).map(item => <li key={item}><Icon name="check" /><span>{item}</span></li>)}</ul><a className="button" href="#salon-demo">{cta}<Arrow /></a><p className="salon-note">{text("Домэйн, хостинг, SMS, төлбөрийн холболт болон арчилгааны зардал, багтах хүрээг үнийн саналд тусад нь тодорхойлно.", "Domain, hosting, SMS, payment integrations and maintenance costs and scope are specified separately in your proposal.")}</p></div>
+        <div className="salon-price-card"><p className="eyebrow">{text("ЦАГ ЗАХИАЛГЫН СИСТЕМ", "BOOKING SYSTEM")}</p>{sale && <p className="salon-offer">{text("Нээлтийн үнэ", "Launch price")} · {SALE_END_DATE} {text("хүртэл", "inclusive")}</p>}<div className="salon-price">{sale && <s>{formatPrice(plan.originalPrice)}</s>}<strong>{formatPrice(sale ? plan.salePrice : plan.originalPrice)}</strong><span>{text("-өөс / төслийн эхлэх үнэ", "starting project price")}</span></div><ul>{pricingCopy[language].features[2].slice(0, 6).map(item => <li key={item}><Icon name="check" /><span>{item}</span></li>)}</ul><a className="button" href="#salon-demo">{cta}<Arrow /></a><p className="salon-note">{text("Хостингийн төлбөрийг захиалагч төлнө. Домэйн, SMS, төлбөрийн холболтын зардлыг үнийн саналд тусад нь тодорхойлно.", "Hosting is paid by the client. Domain, SMS and payment integration costs are specified separately in your proposal.")}</p></div>
       </section>
+
+      <div className="container"><PricingDeliverables /></div>
 
       <section className="container salon-section salon-next"><p className="eyebrow">04 / {text("ХЭРХЭН ЭХЛЭХ ВЭ?", "GETTING STARTED")}</p><h2>{text("Эхлээд 10 минут ярилцъя.", "Let’s start with 10 minutes.")}</h2><ol>{[
         [text("Хүсэлтээ үлдээнэ", "Leave a request"), text("Салоны Instagram хаяг, утас, холбогдоход тохиромжтой цагаа бичээрэй.", "Share your salon’s Instagram, phone number and a convenient time.")],

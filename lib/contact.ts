@@ -3,7 +3,7 @@ export const contactEmail =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL || "devcode549@gmail.com";
 export const instagramUrl =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL ||
-  "https://www.instagram.com/dev_code77/";
+  "https://www.instagram.com/unio.mn/";
 export const facebookUrl =
   process.env.NEXT_PUBLIC_FACEBOOK_URL ||
   "https://www.facebook.com/profile.php?id=61575885910109";

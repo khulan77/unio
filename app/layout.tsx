@@ -1,3 +1,4 @@
+import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -17,14 +18,9 @@ const manrope = localFont({
   variable: "--font-manrope",
   display: "swap",
 });
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : undefined);
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl || "http://localhost:3000"),
-  ...(siteUrl ? { alternates: { canonical: "/" } } : {}),
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: "UNIO — Вэбсайт, цаг захиалга, бизнесийн систем",
   description:
     "Бизнесийн вэбсайт, онлайн цаг захиалгын систем, удирдлагын платформ болон тусгай программ хангамжийн хөгжүүлэлт.",
