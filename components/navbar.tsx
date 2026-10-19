@@ -62,10 +62,18 @@ export function Navbar() {
                 EN
               </button>
             </div>
-            <Link href="#contact" className="button button-small nav-cta">
+            <button
+              type="button"
+              className="button button-small nav-cta"
+              aria-haspopup="dialog"
+              onClick={() => {
+                setOpen(false);
+                window.dispatchEvent(new CustomEvent("unio-inquiry"));
+              }}
+            >
               {t.start}
               <Arrow />
-            </Link>
+            </button>
             <button
               className={`menu-toggle ${open ? "is-open" : ""}`}
               aria-label={open ? t.close : t.menu}

@@ -27,7 +27,15 @@ export function Contact() {
   const [status, setStatus] = useState("");
   useEffect(() => {
     const openInquiry = (event: Event) => {
-      const detail = (event as CustomEvent<PricingInquiry>).detail;
+      const detail = (event as CustomEvent<PricingInquiry | null>).detail;
+      if (detail == null) {
+        setSelection(null);
+        setServiceIndex("");
+        setStatus("");
+        setSent(false);
+        dialog.current?.showModal();
+        return;
+      }
       const plan = plans.find((plan) => plan.id === detail?.plan);
       if (
         !plan ||
