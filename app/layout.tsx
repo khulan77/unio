@@ -25,12 +25,12 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl || "http://localhost:3000"),
   ...(siteUrl ? { alternates: { canonical: "/" } } : {}),
-  title: "UNIO — Website, Booking System & Business Software",
+  title: "UNIO — Вэбсайт, цаг захиалга, бизнесийн систем",
   description:
     "Бизнесийн вэбсайт, онлайн цаг захиалгын систем, удирдлагын платформ болон тусгай программ хангамжийн хөгжүүлэлт.",
   openGraph: {
-    title: "UNIO — Websites & Business Software",
-    description: "Таны бизнес. Нэг систем. Your business. One system.",
+    title: "UNIO — Вэбсайт, цаг захиалга, бизнесийн систем",
+    description: "Таны бизнес. Нэг систем. Вэбсайт, онлайн цаг захиалга, удирдлагын системийг танай бизнест тохируулан хөгжүүлнэ.",
     type: "website",
     locale: "mn_MN",
     alternateLocale: "en_US",
