@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "./language-provider";
 import { Arrow, Logo } from "./ui";
 const anchors = ["/#work", "/pricing", "/#about", "#contact"];
-export function Navbar() {
+export function Navbar({ inquiryHref }: { inquiryHref?: string }) {
   const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -62,7 +62,9 @@ export function Navbar() {
                 EN
               </button>
             </div>
-            <button
+            {inquiryHref ? <Link href={inquiryHref} className="button button-small nav-cta" onClick={() => setOpen(false)}>
+              {language === "mn" ? "Демо товлох" : "Request a demo"}<Arrow />
+            </Link> : <button
               type="button"
               className="button button-small nav-cta"
               aria-haspopup="dialog"
@@ -73,7 +75,7 @@ export function Navbar() {
             >
               {t.start}
               <Arrow />
-            </button>
+            </button>}
             <button
               className={`menu-toggle ${open ? "is-open" : ""}`}
               aria-label={open ? t.close : t.menu}

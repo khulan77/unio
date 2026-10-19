@@ -1,5 +1,6 @@
 "use client";
 import { CaseStudy } from "./case-study";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "./language-provider";
@@ -142,6 +143,9 @@ export function Projects() {
                 <ExternalLink href={project.url} className="text-link">
                   {t.live}
                 </ExternalLink>
+                {project.id === "salon" && <Link href="/salon" className="text-link salon-project-link">
+                  {language === "mn" ? "Танай салонд ийм систем хэрэгтэй юу?" : "Explore this for your salon"}<Arrow />
+                </Link>}
               </div>
               <div className="stacked-project-media">
                 <ProjectPreview

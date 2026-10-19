@@ -12,6 +12,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
           changeFrequency: "monthly",
           priority: 0.8,
         },
+        {
+          url: new URL("/salon", process.env.NEXT_PUBLIC_SITE_URL).href,
+          changeFrequency: "monthly",
+          priority: 0.8,
+        },
       ]
     : [];
 }

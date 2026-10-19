@@ -34,7 +34,7 @@ export function LanguageProvider({
   page = "home",
 }: {
   children: React.ReactNode;
-  page?: "home" | "pricing";
+  page?: "home" | "pricing" | "salon";
 }) {
   const language = useSyncExternalStore(
     subscribe,
@@ -53,7 +53,9 @@ export function LanguageProvider({
   useEffect(() => {
     document.documentElement.lang = language;
     document.title =
-      page === "pricing"
+      page === "salon"
+        ? language === "mn" ? "UNIO — Салоны цаг захиалгын систем" : "UNIO — Salon Booking System"
+        : page === "pricing"
         ? language === "mn"
           ? "UNIO — Үнэ, багц ба нэмэлт хөгжүүлэлт"
           : "UNIO — Pricing & Development Packages"
@@ -63,7 +65,9 @@ export function LanguageProvider({
     const description = document.querySelector('meta[name="description"]');
     description?.setAttribute(
       "content",
-      page === "pricing"
+      page === "salon"
+        ? language === "mn" ? "Салоны онлайн цаг захиалга, ажилтны хуваарь, админ самбар. 10 минутын демо хүсээрэй." : "Online salon booking, specialist schedules and management. Request a 10-minute demo."
+        : page === "pricing"
         ? language === "mn"
           ? "Вэбсайт, системийн багц, төлбөрийн сонголт болон нэмэлт хөгжүүлэлт."
           : "Website and software packages, payment options, and additional development."

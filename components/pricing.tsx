@@ -1,4 +1,6 @@
 "use client";
+import { PricingDeliverables } from "./pricing-deliverables";
+import { planOutcomes } from "@/lib/pricing";
 import { ServiceScope } from "./service-scope";
 import { useState } from "react";
 import {
@@ -67,6 +69,7 @@ export function Pricing() {
             ? p.monthlyNote
             : p.priceNote}
       </p>
+      <PricingDeliverables />
       <SaleBanner />
       <div className="pricing-grid">
         {plans.map((plan, index) => (
@@ -83,6 +86,7 @@ export function Pricing() {
             </div>
             <h3>{p.names[index]}</h3>
             <div className="plan-fit">
+              <div className="plan-outcome"><span>{planOutcomes[language].label}</span><strong>{planOutcomes[language].items[index]}</strong></div>
               <p className="plan-fit-label">{p.fitLabel}</p>
               <p>{p.fit[index]}</p>
               <p className="plan-fit-example">{p.examples[index]}</p>

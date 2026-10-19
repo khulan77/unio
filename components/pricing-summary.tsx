@@ -1,4 +1,6 @@
 "use client";
+import { PricingDeliverables } from "./pricing-deliverables";
+import { planOutcomes } from "@/lib/pricing";
 import Link from "next/link";
 import { formatPrice, plans, pricingCopy, planGuide } from "@/lib/pricing";
 import { useLanguage } from "./language-provider";
@@ -17,8 +19,8 @@ export function PricingSummary() {
           <p className="eyebrow">{p.label}</p>
           <h2>
             {language === "mn"
-              ? "Танд тохирох эхлэл."
-              : "A starting point for you."}
+              ? "Танд яг юу хэрэгтэй вэ?"
+              : "What does your business need?"}
           </h2>
         </div>
         <Link href="/pricing" className="text-link">
@@ -28,6 +30,7 @@ export function PricingSummary() {
           <Arrow />
         </Link>
       </div>
+      <PricingDeliverables />
       <SaleBanner />
       <div className="pricing-summary-grid">
         {plans.map((plan, i) => (
@@ -44,6 +47,7 @@ export function PricingSummary() {
             </div>
             <h3>{p.names[i]}</h3>
             <div className="plan-fit">
+              <div className="plan-outcome"><span>{planOutcomes[language].label}</span><strong>{planOutcomes[language].items[i]}</strong></div>
               <p className="plan-fit-label">{p.fitLabel}</p>
               <p>{p.fit[i]}</p>
               <p className="plan-fit-example">{p.examples[i]}</p>

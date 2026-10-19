@@ -368,3 +368,24 @@ export const planGuide = {
     paymentTitle: "How would you like to pay?",
   },
 };
+
+export const planOutcomes = {
+  mn: {
+    label: "Таны авах үр дүн",
+    items: [
+      "Бизнесээ танилцуулах бэлэн вэбсайт",
+      "Өөрөө мэдээллээ шинэчлэх админтай вэбсайт",
+      "Онлайн цаг захиалга + удирдлагын самбар",
+      "Танай ажиллагаанд тохирсон тусгай систем",
+    ],
+  },
+  en: {
+    label: "What you receive",
+    items: [
+      "A ready-to-use website for your business",
+      "A business website with content management",
+      "Online booking + a management dashboard",
+      "A custom system built for your operations",
+    ],
+  },
+};
