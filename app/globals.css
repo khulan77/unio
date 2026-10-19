@@ -3396,9 +3396,6 @@ body:has(.contact-dialog[open]) {
   }
 }
 
-.pricing-section {
-  border-top: 1px solid var(--line);
-}
 .pricing-options {
   display: inline-flex;
   padding: 5px;
@@ -4020,7 +4017,10 @@ body:has(.contact-dialog[open]) {
   color: var(--muted);
 }
 .pricing-page {
-  padding-top: 80px;
+  padding-top: 0;
+}
+.pricing-page > .pricing-section {
+  padding-top: clamp(32px, 4vw, 56px);
 }
 .pricing-page .section-heading h1 {
   font-size: clamp(32px, 4vw, 56px);
@@ -4778,7 +4778,7 @@ body:has(.contact-dialog[open]) {
     font-size: 13px;
   }
   .pricing-page {
-    padding-top: 72px;
+    padding-top: 0;
   }
   .pricing-options {
     display: flex;
